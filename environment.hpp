@@ -19,8 +19,8 @@ private:
         sf::RectangleShape bgShape;
         sf::Vector2f bgSize;
 
-        sf::Sprite      bgSprite;
-        sf::Sprite      bg2Sprite;
+        sf::Sprite bgSprite;
+        sf::Sprite bg2Sprite;
 
         float bgSpeed;
         float bgY;
