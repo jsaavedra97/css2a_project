@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+#include <cassert>
 
+#include "Player.h"
 using namespace std;
 
 void func()
@@ -21,12 +23,12 @@ int main()
 //    for (int i = 0; i < 10; ++i)
 //        cout << "I'm the main thread" << endl;
 
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML", sf::Style::Close | sf::Style::Titlebar);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML", sf::Style::Close | sf::Style::Titlebar);
     sf::RectangleShape player(sf::Vector2f(100.0f, 100.0f));
     player.setFillColor(sf::Color::White);
     player.setOrigin(50.0f, 50.0f);
     sf::Texture playerTexture;
-    playerTexture.loadFromFile("./player_sprite/smallfighter0005.png");
+    playerTexture.loadFromFile("./sprites/player_sprites/smallfighter0005.png");
     player.setTexture(&playerTexture);
     while (window.isOpen())
     {
