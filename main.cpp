@@ -26,14 +26,14 @@ int main()
     player.setFillColor(sf::Color::White);
     player.setOrigin(50.0f, 50.0f);
     sf::Texture playerTexture;
-    playerTexture.loadFromFile("smallfighter0005.png");
+    playerTexture.loadFromFile("./player_sprite/smallfighter0005.png");
     player.setTexture(&playerTexture);
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            switch (event.type)
+            switch(event.type)
             {
             case sf::Event::Closed:
                 window.close();

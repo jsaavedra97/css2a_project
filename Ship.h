@@ -3,8 +3,7 @@
 #include <string>
 #include <cassert>
 #include <iostream>
-#include <Weapon.h>
-
+#include "Weapon.h"
 using namespace std;
 
 class Ship
