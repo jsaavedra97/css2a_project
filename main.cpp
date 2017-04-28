@@ -2,7 +2,6 @@
 #include <SFML/System.hpp>
 #include <iostream>
 #include <cassert>
-
 #include "Player.h"
 using namespace std;
 
@@ -22,14 +21,28 @@ int main()
 //    thread.launch();
 //    for (int i = 0; i < 10; ++i)
 //        cout << "I'm the main thread" << endl;
+    string filename = "./sprites/player_sprites/smallfighter0005.png";
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML", sf::Style::Close | sf::Style::Titlebar);
-    sf::RectangleShape player(sf::Vector2f(100.0f, 100.0f));
-    player.setFillColor(sf::Color::White);
-    player.setOrigin(50.0f, 50.0f);
-    sf::Texture playerTexture;
-    playerTexture.loadFromFile("./sprites/player_sprites/smallfighter0005.png");
-    player.setTexture(&playerTexture);
+    sf::RenderWindow window(sf::VideoMode(800, 1000), "SFML", sf::Style::Close | sf::Style::Titlebar);
+    Player player1(filename, 100, 1, 400.0f, 800.0f);
+
+//    sf::RectangleShape player(sf::Vector2f(100.0f, 100.0f));
+//    player.setFillColor(sf::Color::White);
+//    player.setOrigin(50.0f, 50.0f);
+//    player.setPosition(400.0f, 800.0f);
+//    sf::Texture playerTexture;
+//    playerTexture.loadFromFile("./sprites/player_sprites/smallfighter0005.png");
+//    player.setTexture(&playerTexture);
+
+//
+//    sf::Sprite sprite;
+//
+//    sf::Texture texture;
+//
+//    texture.loadFromFile(filename);
+//    sprite.setTexture(texture);
+
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -54,28 +67,35 @@ int main()
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-            player.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
+//            player.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
+            player1.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
-            player.move(-0.1f, 0.0f);
+//            player.move(-0.2f, 0.0f);
+            player1.move_player(-0.2f, 0.0f);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            player.move(0.1f, 0.0f);
+//            player.move(0.2f, 0.0f);
+            player1.move_player(0.2f, 0.0f);
+
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
-            player.move(0.0f, -0.1f);
+//            player.move(0.0f, -0.2f);
+            player1.move_player(0.0f, -0.2f);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            player.move(0.0f, 0.1f);
+//            player.move(0.0f, 0.2f);
+            player1.move_player(0.0f, 0.2f);
         }
 
 
         window.clear(sf::Color::Black);
-        window.draw(player);
+//        window.draw(player);
+        window.draw(player1.getSprite());
         window.display();
     }
 

@@ -13,7 +13,8 @@ public:
     Player();
     Player(string filename, int health, int num_weapons, float x,
            float y );
-    void move_player();
+    void move_player(float x, float y);
+
 
 };
 

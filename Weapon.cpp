@@ -2,30 +2,45 @@
 
 Weapon::Weapon()
 {
+    damage = 5;
+    speed = 1.0f;
+    weapon = new sf::RectangleShape(sf::Vector2f(100.0f, 100.0f));
+    weapon->setFillColor(sf::Color::White);
+    weapon->setOrigin(50.0f, 50.0f);
+    weapon->setPosition(400.0f, 800.0f);
+    texture.loadFromFile("./sprites/player_sprites/smallfighter0005.png");
+    weapon->setTexture(&texture);
+    boundingBox = weapon->getGlobalBounds();
 
+    name = "";
 }
-Weapon::Weapon(int x_pos, int y_pos)
+Weapon::Weapon(float x, float y, string name, string filename)
 {
     damage = 5;
-    speed = 5;
-    this->x_pos = x_pos;
-    this->y_pos = y_pos;
-}
-Weapon::Weapon(int x_pos, int y_pos, string name)
-{
+    speed = 1.0f;
+    weapon = new sf::RectangleShape(sf::Vector2f(100.0f, 100.0f));
+    weapon->setFillColor(sf::Color::White);
+    weapon->setOrigin(50.0f, 50.0f);
+    weapon->setPosition(x, y);
+    texture.loadFromFile(filename);
+    weapon->setTexture(&texture);
+    boundingBox = weapon->getGlobalBounds();
+
     this->name = name;
-    damage = 5;
-    speed = 5;
-    this->x_pos = x_pos;
-    this->y_pos = y_pos;
 }
-Weapon::Weapon(int x_pos, int y_pos, string name, int damage)
+Weapon::Weapon(float x, float y, float w, float h, string name, string filename, int damage)
 {
-    this->name = name;
     this->damage = damage;
     speed = 5;
-    this->x_pos = x_pos;
-    this->y_pos = y_pos;
+    weapon = new sf::RectangleShape(sf::Vector2f(w, h));
+    weapon->setFillColor(sf::Color::White);
+    weapon->setOrigin(50.0f, 50.0f);
+    weapon->setPosition(x, y);
+    texture.loadFromFile(filename);
+    weapon->setTexture(&texture);
+    boundingBox = weapon->getGlobalBounds();
+
+    this->name = name;
 }
 void Weapon::setDamage(int damage)
 {
@@ -37,24 +52,13 @@ void Weapon::setSpeed(int speed)
     assert(speed > 0);
     this->speed = speed;
 }
-void Weapon::setXPos(int x_pos)
+void Weapon::setPosition(float x, float y)
 {
-    assert(x_pos > 0);
-    this->x_pos = x_pos;
+    weapon->setPosition(x, y);
 }
-void Weapon::setYPos(int y_pos)
+Weapon::~Weapon()
 {
-    assert(y_pos > 0);
-    this->y_pos = y_pos;
+    delete weapon;
 }
-void Weapon::setHitBoxH(int hitbox_h)
-{
-    assert(hitbox_h > 0);
-    this->hitbox_h = hitbox_h;
-}
-void Weapon::setHitBixW(int hitbox_w)
-{
-    assert(hitbox_w > 0);
-    this->hitbox_w = hitbox_w;
-}
+
 

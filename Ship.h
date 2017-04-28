@@ -14,6 +14,10 @@ public:
     Ship();
     Ship(string filename, int health,
          int num_weapons, float x, float y);
+    sf::Sprite getSprite()const{return sprite;}
+    sf::FloatRect getBoundingBox()const{return boundingBox;}
+    Weapon getWeapon(int x)const{return weapon[x];}
+    void setPosition(float x, float y);
     ~Ship();
 
 protected:
