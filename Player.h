@@ -8,12 +8,16 @@ using namespace std;
 class Player : public Ship
 {
 private:
-    static string file;
+    static string file_left;
+    static string file_mid;
+    static string file_right;
 public:
     Player();
-    Player(string filename, int health, int num_weapons, float x,
-           float y );
-    static string getFile(){return Player::file;}
+    Player(string file_left, string file_mid, string file_right,
+           int health, int num_weapons, float x, float y );
+    static string getFileL(){return Player::file_left;}
+    static string getFileM(){return Player::file_mid;}
+    static string getFileR(){return Player::file_right;}
 //    void move_player(float x, float y);
     void updateMovement();
 

@@ -21,10 +21,12 @@ int main()
 //    thread.launch();
 //    for (int i = 0; i < 10; ++i)
 //        cout << "I'm the main thread" << endl;
-    string filename = "./sprites/player_sprites/smallfighter0005.png";
+    string file_left = "./sprites/player_sprites/smallfighter0001.png";
+    string file_mid = "./sprites/player_sprites/smallfighter0005.png";
+    string file_right = "./sprites/player_sprites/smallfighter0010.png";
 
     sf::RenderWindow window(sf::VideoMode(800, 1000), "SFML", sf::Style::Close | sf::Style::Titlebar);
-    Player player1(filename, 100, 1, 400.0f, 800.0f);
+    Player player1(file_left, file_mid, file_right, 100, 1, 400.0f, 800.0f);
 
 //    sf::RectangleShape player(sf::Vector2f(100.0f, 100.0f));
 //    player.setFillColor(sf::Color::White);
@@ -91,6 +93,8 @@ int main()
 ////            player.move(0.0f, 0.2f);
 //            player1.move_player(0.0f, 0.2f);
 //        }
+        player1.updateMovement();
+//        player1.resetSprite();
 
 
         window.clear(sf::Color::Black);
