@@ -23,6 +23,7 @@ class Weapon
         void setDamage(int damage);
         void setSpeed(int speed);
         void setPosition(float x, float y);
+        void fire();
 
 
     private:

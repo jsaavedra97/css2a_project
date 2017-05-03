@@ -56,6 +56,10 @@ void Weapon::setPosition(float x, float y)
 {
     weapon->setPosition(x, y);
 }
+void Weapon::fire()
+{
+
+}
 Weapon::~Weapon()
 {
     delete weapon;

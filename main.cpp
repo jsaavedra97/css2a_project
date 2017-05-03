@@ -64,33 +64,33 @@ int main()
             }
 
         }
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        {
-            sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-//            player.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
-            player1.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        {
-//            player.move(-0.2f, 0.0f);
-            player1.move_player(-0.2f, 0.0f);
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        {
-//            player.move(0.2f, 0.0f);
-            player1.move_player(0.2f, 0.0f);
-
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        {
-//            player.move(0.0f, -0.2f);
-            player1.move_player(0.0f, -0.2f);
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        {
-//            player.move(0.0f, 0.2f);
-            player1.move_player(0.0f, 0.2f);
-        }
+//        if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+//        {
+//            sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
+////            player.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
+//            player1.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
+//        }
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+//        {
+////            player.move(-0.2f, 0.0f);
+//            player1.move_player(-0.2f, 0.0f);
+//        }
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+//        {
+////            player.move(0.2f, 0.0f);
+//            player1.move_player(0.2f, 0.0f);
+//
+//        }
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+//        {
+////            player.move(0.0f, -0.2f);
+//            player1.move_player(0.0f, -0.2f);
+//        }
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+//        {
+////            player.move(0.0f, 0.2f);
+//            player1.move_player(0.0f, 0.2f);
+//        }
 
 
         window.clear(sf::Color::Black);

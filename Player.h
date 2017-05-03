@@ -14,7 +14,9 @@ public:
     Player(string filename, int health, int num_weapons, float x,
            float y );
     static string getFile(){return Player::file;}
-    void move_player(float x, float y);
+//    void move_player(float x, float y);
+    void updateMovement();
+
 
 
 };
