@@ -17,7 +17,7 @@ Ship::Ship()
 }
 Ship::Ship(string filename, int health, int num_weapons, float x, float y)
 {
-    assert(num_weapons > 1 && num_weapons < 4);
+    assert(num_weapons >= 1 && num_weapons < 4);
     assert(health > 1);
     assert(x > 0 && y > 0);
 

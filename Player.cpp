@@ -3,7 +3,7 @@
 using namespace std;
 string Player::file = "./sprites/player_sprites/smallfighter0005.png";
 
-Player::Player() : Ship(Player::file, 100, 1, 400.0f, 700.0f)
+Player::Player() : Ship(Player::getFile(), 100, 1, 400.0f, 700.0f)
 {
 
 }
