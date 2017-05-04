@@ -26,7 +26,7 @@ int main()
     string file_right = "./sprites/player_sprites/smallfighter0010.png";
 
     sf::RenderWindow window(sf::VideoMode(800, 1000), "SFML", sf::Style::Close | sf::Style::Titlebar);
-    Player player1(file_left, file_mid, file_right, 100, 1, 400.0f, 800.0f);
+    Player player1(file_left, file_mid, file_right, 100, 400.0f, 800.0f);
 
 //    sf::RectangleShape player(sf::Vector2f(100.0f, 100.0f));
 //    player.setFillColor(sf::Color::White);

@@ -6,12 +6,12 @@ string Player::file_mid = "./sprites/player_sprites/smallfighter0005.png";
 string Player::file_right = "./sprites/player_sprites/smallfighter0010.png";
 
 Player::Player() : Ship(Player::getFileL(),Player::getFileM(),Player::getFileR(),
-                            100, 1, 400.0f, 700.0f)
+                            100, 400.0f, 700.0f)
 {
 
 }
 Player::Player(string file_left, string file_mid, string file_right,
-               int health, int num_weapons, float x, float y ) : Ship(file_left, file_mid, file_right, health, num_weapons, x, y)
+               int health, float x, float y ) : Ship(file_left, file_mid, file_right, health, x, y)
 {
 
 }
@@ -42,7 +42,6 @@ void Player::updateMovement()
     {
         sprite.move(0.0f, -0.2f);
         sprite.setTexture(texture_mid);
-
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {

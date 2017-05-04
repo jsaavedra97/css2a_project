@@ -14,7 +14,7 @@ private:
 public:
     Player();
     Player(string file_left, string file_mid, string file_right,
-           int health, int num_weapons, float x, float y );
+           int health, float x, float y );
     static string getFileL(){return Player::file_left;}
     static string getFileM(){return Player::file_mid;}
     static string getFileR(){return Player::file_right;}
