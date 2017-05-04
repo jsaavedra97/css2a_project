@@ -33,24 +33,25 @@ void Player::updateMovement()
         sprite.move(-0.2f, 0.0f);
         sprite.setTexture(texture_left);
     }
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         sprite.move(0.2f, 0.0f);
         sprite.setTexture(texture_right);
     }
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         sprite.move(0.0f, -0.2f);
         sprite.setTexture(texture_mid);
 
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         sprite.move(0.0f, 0.2f);
         sprite.setTexture(texture_mid);
     }
+    else
+        sprite.setTexture(texture_mid);
+
 
 }
 
