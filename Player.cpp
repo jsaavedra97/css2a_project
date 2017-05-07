@@ -68,7 +68,7 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
     for(int i = 0; i < weapon_load.size();i++)
     {
         if(!weapon_load[i].update())
-            weapon_load.pop_front();
+            weapon_load.erase(weapon_load.begin());
     }
 }
 

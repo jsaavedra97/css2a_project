@@ -3,6 +3,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <deque>
+#include <vector>
 #include <string>
 #include <cassert>
 #include <iostream>
@@ -20,7 +21,7 @@ public:
     Projectile getProjectile(){return *projectiles;}
     void setPosition(float x, float y);
     void resetSprite();
-    void fire();
+    virtual void fire();
 
 protected:
     int health;
@@ -30,7 +31,8 @@ protected:
     sf::Texture texture_right;
     sf::FloatRect boundingBox;
     Projectile *projectiles;
-    deque<Projectile>weapon_load;
+//    deque<Projectile>weapon_load;
+    vector<Projectile>weapon_load;
 };
 
 #endif // SHIP_H
