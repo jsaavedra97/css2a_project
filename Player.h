@@ -1,8 +1,7 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
 #include "Ship.h"
+
 using namespace std;
 
 class Player : public Ship
@@ -21,7 +20,7 @@ public:
 
 //    void move_player(float x, float y);
     void updateMovement();
-    void fire(sf::RenderWindow& window);
+    void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
 };
 
 

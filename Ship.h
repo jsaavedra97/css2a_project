@@ -1,12 +1,13 @@
 #ifndef SHIP_H
 #define SHIP_H
+#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
+#include <deque>
 #include <string>
 #include <cassert>
 #include <iostream>
 #include "Projectile.h"
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <deque>
+
 using namespace std;
 
 class Ship

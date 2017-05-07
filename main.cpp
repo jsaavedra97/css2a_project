@@ -1,11 +1,5 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
 #include <cassert>
 #include "Player.h"
-#include "Projectile.h"
-#include <deque>
-#include <vector>
 using namespace std;
 
 void func()
@@ -17,14 +11,9 @@ int main()
 {
 //    Thread thread(&func);
 //    thread.launch();
-//
-//
-//
-//    // run it
-//    thread.launch();
 //    for (int i = 0; i < 10; ++i)
 //        cout << "I'm the main thread" << endl;
-
+    sf::Clock clock;
     int counter = 0;
     string file_left = "./sprites/player_sprites/smallfighter0001.png";
     string file_mid = "./sprites/player_sprites/smallfighter0005.png";
@@ -73,11 +62,14 @@ int main()
             {
                 window.close();
             }
-
         }
-        window.clear();
+        sf::Time elapsed = clock.getElapsedTime();
 
-        player1.fire(window);
+        window.clear();
+//        cout << elapsed.asSeconds() << endl;
+
+        player1.fire(window, clock, elapsed);
+
 
         player1.updateMovement();
 

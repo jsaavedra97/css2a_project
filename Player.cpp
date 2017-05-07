@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <iostream>
 using namespace std;
 string Player::file_left = "./sprites/player_sprites/smallfighter0001.png";
 string Player::file_mid = "./sprites/player_sprites/smallfighter0005.png";
@@ -52,12 +51,16 @@ void Player::updateMovement()
         sprite.setTexture(texture_mid);
 
 }
-void Player::fire(sf::RenderWindow& window)
+void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if(elapsed.asSeconds() > 0.1)
     {
-        projectiles->shape.setPosition(sprite.getPosition());
-        weapon_load.push_back(*projectiles);
+        clock.restart();
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        {
+            projectiles->shape.setPosition(sprite.getPosition());
+            weapon_load.push_back(*projectiles);
+        }
     }
     for(int i = 0; i < weapon_load.size();i++)
         window.draw(weapon_load[i].shape);
