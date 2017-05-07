@@ -13,21 +13,19 @@ class Projectile
 {
     public:
         Projectile();
-        Projectile(float x, float y, string name, string filename);
-        Projectile(float x, float y, float w, float h, string name,string filename, int damage);
-        ~Projectile();
+        Projectile(string name, string filename);
+        Projectile(float w, float h, string name,string filename, int damage);
         int getDamage()const{return damage;}
         int getSpeed()const{return speed;}
-        sf::RectangleShape getPosition()const{return *projectile;}
+        sf::RectangleShape getShape()const{return shape;}
         sf::FloatRect getBoundingBox()const{return boundingBox;}
         void setDamage(int damage);
         void setSpeed(int speed);
-        void setPosition(float x, float y);
-        void fire();
+        void setPosition(sf::Vector2f xy);
+        bool update();
 
-
-    private:
-        sf::RectangleShape *projectile;
+//    private:
+        sf::RectangleShape shape;
         sf::Texture texture;
         sf::FloatRect boundingBox;
 

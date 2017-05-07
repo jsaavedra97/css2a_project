@@ -18,11 +18,10 @@ public:
     static string getFileL(){return Player::file_left;}
     static string getFileM(){return Player::file_mid;}
     static string getFileR(){return Player::file_right;}
+
 //    void move_player(float x, float y);
     void updateMovement();
-
-
-
+    void fire(sf::RenderWindow& window);
 };
 
 

@@ -4,7 +4,6 @@ using namespace std;
 
 Ship::Ship()
 {
-
     health = 10;
 
     texture_left.loadFromFile("./sprites/player_sprites/smallfighter0001.png");
@@ -13,9 +12,7 @@ Ship::Ship()
     sprite.setTexture(texture_mid);
     sprite.setOrigin(100.0f, 100.0f);
     boundingBox = sprite.getGlobalBounds();
-
-    projectile = new Projectile;
-
+//    projectiles = new Projectile;
 }
 Ship::Ship(string file_left, string file_mid, string file_right,
            int health, float x, float y)
@@ -29,8 +26,9 @@ Ship::Ship(string file_left, string file_mid, string file_right,
     texture_right.loadFromFile(file_right);
     sprite.setTexture(texture_mid);
     sprite.setPosition(x,y);
+    sprite.setOrigin(sprite.getLocalBounds().width/2.6, 0);
     boundingBox = sprite.getGlobalBounds();
-    projectile = new Projectile;
+    projectiles = new Projectile;
 }
 void Ship::setPosition(float x, float y)
 {
@@ -41,7 +39,6 @@ void Ship::resetSprite()
 {
     sprite.setTexture(texture_mid);
 }
-Ship::~Ship()
+void Ship::fire()
 {
-    delete[] projectile;
 }

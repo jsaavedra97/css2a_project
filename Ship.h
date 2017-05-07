@@ -6,6 +6,7 @@
 #include "Projectile.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <deque>
 using namespace std;
 
 class Ship
@@ -15,10 +16,10 @@ public:
     Ship(string file_left, string file_mid, string file_right, int health, float x, float y);
     sf::Sprite getSprite()const{return sprite;}
     sf::FloatRect getBoundingBox()const{return boundingBox;}
-    Projectile getProjectile(int x)const{return *projectile;}
+    Projectile getProjectile(){return *projectiles;}
     void setPosition(float x, float y);
     void resetSprite();
-    ~Ship();
+    void fire();
 
 protected:
     int health;
@@ -27,7 +28,8 @@ protected:
     sf::Texture texture_mid;
     sf::Texture texture_right;
     sf::FloatRect boundingBox;
-    Projectile *projectile;
+    Projectile *projectiles;
+    deque<Projectile>weapon_load;
 };
 
 #endif // SHIP_H

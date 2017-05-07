@@ -1,45 +1,36 @@
 #include "Projectile.h"
 
+
 Projectile::Projectile()
 {
     damage = 5;
-    speed = 1.0f;
-    projectile = new sf::RectangleShape(sf::Vector2f(100.0f, 100.0f));
-    projectile->setFillColor(sf::Color::White);
-    projectile->setOrigin(50.0f, 50.0f);
-    projectile->setPosition(400.0f, 800.0f);
-    texture.loadFromFile("./sprites/player_sprites/smallfighter0005.png");
-    projectile->setTexture(&texture);
-    boundingBox = projectile->getGlobalBounds();
-
+    speed = -1.0f;
+    shape.setSize(sf::Vector2f(20.0f, 100.0f));
+    shape.setFillColor(sf::Color::Green);
+    shape.setOrigin(10.0f, 0.0f);
+//    shape.setTexture(&texture);
+    boundingBox = shape.getGlobalBounds();
     name = "";
 }
-Projectile::Projectile(float x, float y, string name, string filename)
+Projectile::Projectile(string name, string filename)
 {
-    damage = 5;
-    speed = 1.0f;
-    projectile = new sf::RectangleShape(sf::Vector2f(100.0f, 100.0f));
-    projectile->setFillColor(sf::Color::White);
-    projectile->setOrigin(50.0f, 50.0f);
-    projectile->setPosition(x, y);
-    texture.loadFromFile(filename);
-    projectile->setTexture(&texture);
-    boundingBox = projectile->getGlobalBounds();
 
+    damage = 5;
+    speed = -1.0f;
+    shape.setSize(sf::Vector2f(20.0f, 100.0f));
+    shape.setFillColor(sf::Color::White);
+    shape.setOrigin(10.0f, 0.0f);
+    boundingBox = shape.getGlobalBounds();
     this->name = name;
 }
-Projectile::Projectile(float x, float y, float w, float h, string name, string filename, int damage)
+Projectile::Projectile(float w, float h, string name, string filename, int damage)
 {
     this->damage = damage;
-    speed = 5;
-    projectile = new sf::RectangleShape(sf::Vector2f(w, h));
-    projectile->setFillColor(sf::Color::White);
-    projectile->setOrigin(50.0f, 50.0f);
-    projectile->setPosition(x, y);
-    texture.loadFromFile(filename);
-    projectile->setTexture(&texture);
-    boundingBox = projectile->getGlobalBounds();
-
+    speed = -5.0f;
+    shape.setSize(sf::Vector2f(w, h));
+    shape.setFillColor(sf::Color::White);
+    shape.setOrigin(w/2, 0.0f);
+    boundingBox = shape.getGlobalBounds();
     this->name = name;
 }
 void Projectile::setDamage(int damage)
@@ -49,20 +40,26 @@ void Projectile::setDamage(int damage)
 }
 void Projectile::setSpeed(int speed)
 {
-    assert(speed > 0);
+    assert(speed < 0);
     this->speed = speed;
 }
-void Projectile::setPosition(float x, float y)
+void Projectile::setPosition(sf::Vector2f xy)
 {
-    projectile->setPosition(x, y);
+    shape.setPosition(xy);
 }
-void Projectile::fire()
+bool Projectile::update()
 {
+    if(shape.getPosition().y > 0)
+    {
+        shape.move(0.0f, speed);
+        return true;
+    }
+    else
+    {
+        cout << "Collision" << endl;
+        return false;
+    }
+}
 
-}
-Projectile::~Projectile()
-{
-    delete projectile;
-}
 
 
