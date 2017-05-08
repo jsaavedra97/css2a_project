@@ -26,7 +26,7 @@ Ship::Ship(string file_left, string file_mid, string file_right,
     texture_right.loadFromFile(file_right);
     sprite.setTexture(texture_mid);
     sprite.setPosition(x,y);
-    sprite.setOrigin(sprite.getLocalBounds().width/2.6, 0);
+    sprite.setOrigin(sprite.getLocalBounds().width/2, 0);
     boundingBox = sprite.getGlobalBounds();
     projectiles = new Projectile;
 }

@@ -14,10 +14,7 @@ Player::Player(string file_left, string file_mid, string file_right,
 {
 
 }
-//void Player::move_player(float x, float y)
-//{
-//    sprite.move(x, y);
-//}
+
 void Player::updateMovement()
 {
 //    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -25,8 +22,6 @@ void Player::updateMovement()
 //        sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
 //        player1.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
 //    }
-
-
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         sprite.move(-0.2f, 0.0f);
