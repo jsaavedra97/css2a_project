@@ -12,6 +12,7 @@ private:
     static string file_right;
 public:
     Player();
+    Player(string file_mid, int health, float x, float y );
     Player(string file_left, string file_mid, string file_right,
            int health, float x, float y );
     void updateMovement();

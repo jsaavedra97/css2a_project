@@ -1,8 +1,12 @@
 #include "Player.h"
 using namespace std;
 
-Player::Player() : Ship("","","",100, 400.0f, 700.0f)
+Player::Player() : Ship()
 {
+}
+Player::Player(string file_mid, int health, float x, float y ) : Ship(file_mid, health, x, y)
+{
+
 }
 Player::Player(string file_left, string file_mid, string file_right,
                int health, float x, float y ) : Ship(file_left, file_mid, file_right, health, x, y)
@@ -11,42 +15,41 @@ Player::Player(string file_left, string file_mid, string file_right,
 }
 void Player::updateMovement()
 {
-//    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-//    {
-//        sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-//        player1.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
-//    }
     bool left = false,
-         right = false;
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+         right = false; //
+    if((sprite.getGlobalBounds().top > 0.0f) && (sprite.getGlobalBounds().left > 0.0f))
     {
-        sprite.move(-0.2f, 0.0f);
-        sprite.setTexture(texture_left);
-        left = true;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-    {
-        sprite.move(0.2f, 0.0f);
-        sprite.setTexture(texture_right);
-        right = true;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    {
-        sprite.move(0.0f, -0.2f);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            sprite.move(-0.2f, 0.0f);
+            sprite.setTexture(texture_left);
+            left = true;
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            sprite.move(0.2f, 0.0f);
+            sprite.setTexture(texture_right);
+            right = true;
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            sprite.move(0.0f, -0.2f);
+            if(!left && !right)
+                sprite.setTexture(texture_mid);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            sprite.move(0.0f, 0.2f);
+            if(!left && !right)
+                sprite.setTexture(texture_mid);
+        }
         if(!left && !right)
             sprite.setTexture(texture_mid);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    else
     {
-        sprite.move(0.0f, 0.2f);
-        if(!left && !right)
-            sprite.setTexture(texture_mid);
+        sprite.move(0.0f,0.2f);
     }
-    if(!left && !right)
-        sprite.setTexture(texture_mid);
-
-
 }
 void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 {

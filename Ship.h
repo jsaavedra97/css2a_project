@@ -15,6 +15,7 @@ class Ship
 {
 public:
     Ship();
+    Ship(string file_mid, int health, float x, float y);
     Ship(string file_left, string file_mid, string file_right, int health, float x, float y);
     sf::Sprite getSprite()const{return sprite;}
     sf::FloatRect getBoundingBox()const{return boundingBox;}

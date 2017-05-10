@@ -5,14 +5,24 @@ using namespace std;
 Ship::Ship()
 {
     health = 10;
-
-    texture_left.loadFromFile("./sprites/player_sprites/smallfighter0001.png");
-    texture_mid.loadFromFile("./sprites/player_sprites/smallfighter0005.png");
-    texture_right.loadFromFile("./sprites/player_sprites/smallfighter0010.png");
+    texture_mid.loadFromFile("./sprites/no_image.png");
     sprite.setTexture(texture_mid);
     sprite.setOrigin(100.0f, 100.0f);
     boundingBox = sprite.getGlobalBounds();
-//    projectiles = new Projectile;
+    projectiles = new Projectile;
+}
+Ship::Ship(string file_mid, int health, float x, float y)
+{
+    assert(health > 1);
+    assert(x > 0 && y > 0);
+
+    this->health = health;
+    texture_mid.loadFromFile(file_mid);
+    sprite.setTexture(texture_mid);
+    sprite.setPosition(x,y);
+    sprite.setOrigin(sprite.getLocalBounds().width/2, 0);
+    boundingBox = sprite.getGlobalBounds();
+    projectiles = new Projectile;
 }
 Ship::Ship(string file_left, string file_mid, string file_right,
            int health, float x, float y)
