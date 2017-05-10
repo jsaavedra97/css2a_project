@@ -14,10 +14,6 @@ public:
     Player();
     Player(string file_left, string file_mid, string file_right,
            int health, float x, float y );
-    static string getFileL(){return Player::file_left;}
-    static string getFileM(){return Player::file_mid;}
-    static string getFileR(){return Player::file_right;}
-
 //    void move_player(float x, float y);
     void updateMovement();
     void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
