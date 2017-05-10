@@ -67,10 +67,10 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
             weapon_load.push_back(*projectiles);
         }
     }
-    for(int i = 0; i < weapon_load.size(); i++)
+    for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
         window.draw(weapon_load[i].shape);
 
-    for(int i = 0; i < weapon_load.size(); i++)
+    for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
     {
         if(!weapon_load[i].update())
             weapon_load.erase(weapon_load.begin());
