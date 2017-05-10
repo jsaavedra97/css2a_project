@@ -14,7 +14,8 @@ Ship::Ship()
 Ship::Ship(string file_mid, int health, float x, float y)
 {
     assert(health > 1);
-    assert(x > 0 && y > 0);
+    assert(file_mid != "");
+    assert(x > 0 && y > 0); // need to assert upper-bounds
 
     this->health = health;
     texture_mid.loadFromFile(file_mid);
@@ -28,7 +29,8 @@ Ship::Ship(string file_left, string file_mid, string file_right,
            int health, float x, float y)
 {
     assert(health > 1);
-    assert(x > 0 && y > 0);
+    assert(file_mid != "");
+    assert(x > 0 && y > 0); // need to assert upper-bounds
 
     this->health = health;
     texture_left.loadFromFile(file_left);
@@ -42,7 +44,7 @@ Ship::Ship(string file_left, string file_mid, string file_right,
 }
 void Ship::setPosition(float x, float y)
 {
-    assert(x > 0 && y > 0);
+    assert(x > 0 && y > 0); // need to assert upper-bound
     sprite.setPosition(x,y);
 }
 void Ship::resetSprite()

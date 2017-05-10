@@ -12,7 +12,6 @@ class Projectile
 {
     public:
         Projectile();
-        Projectile(string name, string filename);
         Projectile(float w, float h, string name,string filename, int damage);
 
         int getDamage()const{return damage;}

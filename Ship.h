@@ -35,7 +35,6 @@ protected:
     sf::Texture texture_right;
     sf::FloatRect boundingBox;
     Projectile *projectiles;
-//    deque<Projectile>weapon_load;
     vector<Projectile>weapon_load;
 };
 

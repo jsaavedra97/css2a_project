@@ -16,7 +16,7 @@ Player::Player(string file_left, string file_mid, string file_right,
 void Player::updateMovement(sf::RenderWindow& window)
 {
     bool left = false,
-         right = false; //
+         right = false;
 
     if(sprite.getGlobalBounds().top <= 0.0f)
         sprite.move(0.0f, 0.2f);
@@ -44,16 +44,16 @@ void Player::updateMovement(sf::RenderWindow& window)
         {
             sprite.move(0.0f, -0.2f);
             if(!left && !right)
-                sprite.setTexture(texture_mid);
+                resetSprite();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
             sprite.move(0.0f, 0.2f);
             if(!left && !right)
-                sprite.setTexture(texture_mid);
+                resetSprite();
         }
         if(!left && !right)
-            sprite.setTexture(texture_mid);
+            resetSprite();
     }
 }
 void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)

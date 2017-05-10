@@ -8,20 +8,8 @@ Projectile::Projectile()
     shape.setSize(sf::Vector2f(20.0f, 100.0f));
     shape.setFillColor(sf::Color::White);
     shape.setOrigin(10.0f, 0.0f);
-//    shape.setTexture(&texture);
     boundingBox = shape.getGlobalBounds();
     name = "";
-}
-Projectile::Projectile(string name, string filename)
-{
-
-    damage = 5;
-    speed = -1.0f;
-    shape.setSize(sf::Vector2f(20.0f, 100.0f));
-    shape.setFillColor(sf::Color::White);
-    shape.setOrigin(10.0f, 0.0f);
-    boundingBox = shape.getGlobalBounds();
-    this->name = name;
 }
 Projectile::Projectile(float w, float h, string name, string filename, int damage)
 {
