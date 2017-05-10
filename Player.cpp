@@ -76,6 +76,17 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
             weapon_load.erase(weapon_load.begin());
     }
 }
+void Player::takeDamage(const Projectile &p)
+{
+    if(health - p.getDamage() > 0)
+    {
+        health -= p.getDamage();
+    }
+}
+void Player::checkBounds()
+{
+
+}
 
 
 

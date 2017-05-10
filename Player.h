@@ -17,6 +17,8 @@ public:
            int health, float x, float y );
     virtual void updateMovement(sf::RenderWindow& window);
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
+    virtual void takeDamage(const Projectile &p);
+    virtual void checkBounds();
 };
 
 
