@@ -17,7 +17,24 @@ void Player::updateMovement(sf::RenderWindow& window)
 {
     bool left = false,
          right = false; //
-    if((sprite.getGlobalBounds().top > 0.0f) && (sprite.getGlobalBounds().left > 0.0f))
+
+    if(sprite.getGlobalBounds().top <= 0.0f)
+    {
+        sprite.move(0.0f, 0.2f);
+    }
+    else if(sprite.getGlobalBounds().top >= (window.getSize().y - sprite.getGlobalBounds().height))
+    {
+        sprite.move(0.0f,-0.2f);
+    }
+    else if(sprite.getGlobalBounds().left <= 0.0f)
+    {
+        sprite.move(2.0f,0.0f);
+    }
+    else if(sprite.getGlobalBounds().left >= (window.getSize().x - sprite.getGlobalBounds().width))
+    {
+        sprite.move(-2.0f,0.0f);
+    }
+    else
     {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
@@ -45,10 +62,6 @@ void Player::updateMovement(sf::RenderWindow& window)
         }
         if(!left && !right)
             sprite.setTexture(texture_mid);
-    }
-    else
-    {
-        sprite.move(0.0f,0.2f);
     }
 }
 void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
