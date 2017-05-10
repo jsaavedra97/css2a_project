@@ -13,7 +13,7 @@ Player::Player(string file_left, string file_mid, string file_right,
 {
 
 }
-void Player::updateMovement()
+void Player::updateMovement(sf::RenderWindow& window)
 {
     bool left = false,
          right = false; //

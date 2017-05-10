@@ -40,7 +40,7 @@ int main()
         window.clear();
 //        cout << elapsed.asSeconds() << endl;
         player1->fire(window, clock, elapsed);
-        player1->updateMovement();
+        player1->updateMovement(window);
         window.draw(player1->getSprite());
         window.display();
     }

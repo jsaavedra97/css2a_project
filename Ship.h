@@ -22,8 +22,8 @@ public:
     Projectile getProjectile(){return *projectiles;}
     void setPosition(float x, float y);
     void resetSprite();
+    virtual void updateMovement(sf::RenderWindow& window)=0;
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)=0;
-    virtual void updateMovement()=0;
     virtual ~Ship(){delete projectiles;}
 
 
