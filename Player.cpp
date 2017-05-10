@@ -16,28 +16,36 @@ void Player::updateMovement()
 //        sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
 //        player1.setPosition(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
 //    }
+    bool left = false,
+         right = false;
+
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         sprite.move(-0.2f, 0.0f);
         sprite.setTexture(texture_left);
+        left = true;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         sprite.move(0.2f, 0.0f);
         sprite.setTexture(texture_right);
+        right = true;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         sprite.move(0.0f, -0.2f);
-        sprite.setTexture(texture_mid);
+        if(!left && !right)
+            sprite.setTexture(texture_mid);
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         sprite.move(0.0f, 0.2f);
-        sprite.setTexture(texture_mid);
+        if(!left && !right)
+            sprite.setTexture(texture_mid);
     }
-    else
+    if(!left && !right)
         sprite.setTexture(texture_mid);
+
 
 }
 void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
@@ -51,10 +59,10 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
             weapon_load.push_back(*projectiles);
         }
     }
-    for(int i = 0; i < weapon_load.size();i++)
+    for(int i = 0; i < weapon_load.size(); i++)
         window.draw(weapon_load[i].shape);
 
-    for(int i = 0; i < weapon_load.size();i++)
+    for(int i = 0; i < weapon_load.size(); i++)
     {
         if(!weapon_load[i].update())
             weapon_load.erase(weapon_load.begin());
