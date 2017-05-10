@@ -6,7 +6,7 @@ Projectile::Projectile()
     damage = 5;
     speed = -1.0f;
     shape.setSize(sf::Vector2f(20.0f, 100.0f));
-    shape.setFillColor(sf::Color::Green);
+    shape.setFillColor(sf::Color::White);
     shape.setOrigin(10.0f, 0.0f);
 //    shape.setTexture(&texture);
     boundingBox = shape.getGlobalBounds();
