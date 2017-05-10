@@ -14,9 +14,8 @@ public:
     Player();
     Player(string file_left, string file_mid, string file_right,
            int health, float x, float y );
-//    void move_player(float x, float y);
     void updateMovement();
-    void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
+    virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
 };
 
 

@@ -21,7 +21,10 @@ public:
     Projectile getProjectile(){return *projectiles;}
     void setPosition(float x, float y);
     void resetSprite();
-    virtual void fire();
+    virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)=0;
+    virtual void updateMovement()=0;
+    virtual ~Ship(){delete projectiles;}
+
 
 protected:
     int health;

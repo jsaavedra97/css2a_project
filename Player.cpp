@@ -3,14 +3,12 @@ using namespace std;
 
 Player::Player() : Ship("","","",100, 400.0f, 700.0f)
 {
-
 }
 Player::Player(string file_left, string file_mid, string file_right,
                int health, float x, float y ) : Ship(file_left, file_mid, file_right, health, x, y)
 {
 
 }
-
 void Player::updateMovement()
 {
 //    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))

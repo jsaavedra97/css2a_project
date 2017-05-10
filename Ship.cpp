@@ -39,6 +39,3 @@ void Ship::resetSprite()
 {
     sprite.setTexture(texture_mid);
 }
-void Ship::fire()
-{
-}

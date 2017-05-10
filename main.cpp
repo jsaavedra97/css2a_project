@@ -1,5 +1,6 @@
 #include <cassert>
 #include "Player.h"
+#include "Ship.h"
 using namespace std;
 
 int main()
@@ -11,7 +12,8 @@ int main()
     string file_right = "./sprites/player_sprites/smallfighter0010.png";
 
     sf::RenderWindow window(sf::VideoMode(800, 1000), "SFML", sf::Style::Close | sf::Style::Titlebar);
-    Player player1(file_left, file_mid, file_right, 100, 400.0f, 800.0f);
+
+    Ship *player1 = new Player(file_left, file_mid, file_right, 100, 400.0f, 800.0f);
 
     while (window.isOpen())
     {
@@ -37,11 +39,12 @@ int main()
 
         window.clear();
 //        cout << elapsed.asSeconds() << endl;
-        player1.fire(window, clock, elapsed);
-        player1.updateMovement();
-        window.draw(player1.getSprite());
+        player1->fire(window, clock, elapsed);
+        player1->updateMovement();
+        window.draw(player1->getSprite());
         window.display();
     }
+    delete player1;
 
     return 0;
 }
