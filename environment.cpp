@@ -1,23 +1,23 @@
-#include "Environment.hpp"
+#include "Environment.h"
 Environment::Environment()
 {
     p = new PowerUp(sf::Vector2f(50.0f,50.0f),("l.png"), 1);
 
     bgSpeed = 0.3;
     elapsedTime = 0.7;
-    
-    bgTex.loadFromFile(resourcePath() + "background.png");
-    font.loadFromFile(resourcePath() + "sansation.ttf");
-    music.openFromFile(resourcePath() + "spacenice.ogg");
-    icon.loadFromFile(resourcePath() + "shipIcon.png");
-    
+
+    bgTex.loadFromFile("./background.png");
+    font.loadFromFile("./sansation.ttf");
+    music.openFromFile("./spacenice.ogg");
+    icon.loadFromFile("./shipIcon.png");
+
     bgTex.setSmooth(false);
     bgTex.setRepeated(true);
-    
+
     bgY = bgShape.getPosition().y;
     bgSize.x = 800;
     bgSize.y = 1000;
-    
+
     bgShape.setTexture(&bgTex);
     bgShape.setSize(bgSize);
     music.play();
@@ -35,7 +35,7 @@ void Environment::Render(sf::RenderWindow &window)
 {
     window.draw(bgShape);
 }
-void Environment::showPowerUp(sf::RenderWindow &window, sf::Clock &clock2,sf::Time &elapsed2)
+void Environment::powerUpTimer(sf::RenderWindow &window, sf::Clock &clock2,sf::Time &elapsed2)
 {
     if (elapsed2.asSeconds() >= 2)
     {
