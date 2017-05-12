@@ -12,7 +12,7 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(800, 1000), "SFML", sf::Style::Close | sf::Style::Titlebar);
 
-    Ship *player1 = new Player(file_left, file_mid, file_right, 100, 400.0f, 800.0f, sf::Vector2f(20.0f, 100.f),10,-1.0f);
+    Ship *player1 = new Player(file_left, file_mid, file_right, 100, 400.0f, 800.0f,Projectile());
 
     while (window.isOpen())
     {

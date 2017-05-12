@@ -5,12 +5,12 @@ Player::Player() : Ship()
 {
     projectiles->setSpeed(-1.0f);
 }
-Player::Player(string file_mid, int health, float x, float y,sf::Vector2f dim, int damage, float speed  ) : Ship(file_mid, health, x, y, dim, damage, speed)
+Player::Player(string file_mid, int health, float x, float y, const Projectile& p  ) : Ship(file_mid, health, x, y, p)
 {
     projectiles->setSpeed(-1.0f);
 }
 Player::Player(string file_left, string file_mid, string file_right,
-               int health, float x, float y,sf::Vector2f dim, int damage, float speed ) : Ship(file_left, file_mid, file_right, health, x, y, dim, damage, speed)
+               int health, float x, float y,const Projectile& p ) : Ship(file_left, file_mid, file_right, health, x, y, p)
 {
     projectiles->setSpeed(-1.0f);
 }

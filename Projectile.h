@@ -12,6 +12,8 @@ class Projectile
 {
     public:
         Projectile();
+        Projectile(const Projectile& p);
+        Projectile(int damage, float speed);
         Projectile(sf::Vector2f dim, int damage, float speed);
 
         int getDamage()const{return damage;}

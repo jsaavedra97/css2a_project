@@ -11,7 +11,7 @@ Ship::Ship()
     boundingBox = sprite.getGlobalBounds();
     projectiles = new Projectile;
 }
-Ship::Ship(string file_mid, int health, float x, float y,sf::Vector2f dim, int damage, float speed )
+Ship::Ship(string file_mid, int health, float x, float y,const Projectile& p)
 {
     assert(health > 1);
     assert(file_mid != "");
@@ -23,10 +23,10 @@ Ship::Ship(string file_mid, int health, float x, float y,sf::Vector2f dim, int d
     sprite.setPosition(x,y);
     sprite.setOrigin(sprite.getLocalBounds().width/2, 0);
     boundingBox = sprite.getGlobalBounds();
-    projectiles = new Projectile(dim, damage, speed);
+    projectiles = new Projectile(p);
 }
 Ship::Ship(string file_left, string file_mid, string file_right,
-           int health, float x, float y,sf::Vector2f dim, int damage, float speed )
+           int health, float x, float y,const Projectile& p)
 {
     assert(health > 1);
     assert(file_mid != "");
@@ -40,7 +40,7 @@ Ship::Ship(string file_left, string file_mid, string file_right,
     sprite.setPosition(x,y);
     sprite.setOrigin(sprite.getLocalBounds().width/2, 0);
     boundingBox = sprite.getGlobalBounds();
-    projectiles = new Projectile(dim,damage,speed);
+    projectiles = new Projectile(p);
 }
 void Ship::setPosition(float x, float y)
 {

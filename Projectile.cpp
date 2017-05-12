@@ -10,7 +10,19 @@ Projectile::Projectile()
     shape.setOrigin(10.0f, 0.0f);
     boundingBox = shape.getGlobalBounds();
 }
-
+Projectile::Projectile(const Projectile& p)
+{
+    *this = p;
+}
+Projectile::Projectile(int damage, float speed)
+{
+    this->damage = damage;
+    this->speed = speed;
+    shape.setSize(sf::Vector2f(20.0f, 100.0f));
+    shape.setFillColor(sf::Color::White);
+    shape.setOrigin(10.0f, 0.0f);
+    boundingBox = shape.getGlobalBounds();
+}
 Projectile::Projectile(sf::Vector2f dim, int damage, float speed)
 {
     this->damage = damage;
