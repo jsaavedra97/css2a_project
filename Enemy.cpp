@@ -12,8 +12,8 @@ Enemy::Enemy():
 Ship("./sprites/enemy_sprites/asteroid.png", 25, 0, 0, Projectile()){
     enemy_name = "Asteroid";
     sprite.setRotation(180.0f);
-    counter = 0;
     movement_type = 64; // Just an arbitrary number
+    boundary_checker = true;
 }
 
 Enemy::Enemy(std::string file_name, int health, float x, float y, const Projectile& p, std::string enemy_name, int movement_type):
@@ -23,7 +23,7 @@ Ship(file_name, health, x, y, p){
     this->enemy_name = enemy_name;
     this->movement_type = movement_type;
     sprite.setRotation(180.0f);
-    counter = 0;
+    boundary_checker = true;
 }
 
 bool Enemy::enemyDeadOrAlive()const{
@@ -51,15 +51,15 @@ void Enemy::updateMovement(sf::RenderWindow& window){
     switch(movement_type){
     // Movement 1
     case 1:
-        if(sprite.getPosition().x <= window.getSize().x - 65 && counter == 0){
+        if(sprite.getPosition().x <= window.getSize().x - 65 && boundary_checker){
             sprite.move(0.05f, 0.0f);
             if(sprite.getPosition().x > window.getSize().x - 65)
-                counter = 1;
+                boundary_checker = false;
         }
-        else if(sprite.getPosition().x >= window.getSize().x - 65 || (sprite.getPosition().x >= 65 && counter == 1)){
+        else if(sprite.getPosition().x >= window.getSize().x - 65 || (sprite.getPosition().x >= 65 && !boundary_checker)){
             sprite.move(-0.05f, 0.0f);
             if(sprite.getPosition().x < 65)
-                counter = 0;
+                boundary_checker = true;
         }
 
         if(sprite.getPosition().y < 1250)
@@ -68,15 +68,15 @@ void Enemy::updateMovement(sf::RenderWindow& window){
 
     // Movement 2
     case 2:
-        if(sprite.getPosition().x >= 65 && counter == 0){
+        if(sprite.getPosition().x >= 65 && boundary_checker){
             sprite.move(-0.05f, 0.0f);
             if(sprite.getPosition().x < 65)
-                counter = 1;
+                boundary_checker = false;
         }
-        if(sprite.getPosition().x <= 65 || (sprite.getPosition().x <= window.getSize().x - 65 && counter == 1)){
+        else if(sprite.getPosition().x <= 65 || (sprite.getPosition().x <= window.getSize().x - 65 && !boundary_checker)){
             sprite.move(0.05f, 0.0f);
             if(sprite.getPosition().x > window.getSize().x - 65)
-                counter = 0;
+                boundary_checker = true;
         }
         if(sprite.getPosition().y < 1250)
             sprite.move(0.0f, 0.02f);

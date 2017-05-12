@@ -17,10 +17,10 @@ class Enemy: public Ship{
 private:
     std::string enemy_name,
                 file_name;
-    // Is important, don't touch!!
-    int counter;
     // Determines Enemy movement pattern
     int movement_type;
+    // Used in checking movement
+    bool boundary_checker;
 
 public:
     // Constructors
