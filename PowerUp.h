@@ -1,7 +1,7 @@
 #ifndef PowerUp_h
 #define PowerUp_h
-//#include <SFML/Graphics.h>
-//#include <SFML/Audio.h>
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <fstream>
 #include <iostream>
 #include <ctime>

@@ -1,7 +1,7 @@
 #ifndef EXTERNALENTITY_H
 #define EXTERNALENTITY_H
-#include <SFML/Graphics.h>
-#include <SFML/System.h>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include <string>
 #include <cassert>
 #include <iostream>

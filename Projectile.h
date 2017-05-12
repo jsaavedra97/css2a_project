@@ -1,7 +1,7 @@
 #ifndef Projectile_H
 #define Projectile_H
-#include <SFML/Graphics.h>
-#include <SFML/System.h>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include "ExternalEntity.h"
 #include <string>
 #include <cassert>

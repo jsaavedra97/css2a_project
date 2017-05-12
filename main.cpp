@@ -1,5 +1,5 @@
-#include <SFML/Audio.h>
-#include <SFML/Graphics.h>
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -7,6 +7,7 @@
 #include "Environment.h"
 #include "PowerUp.h"
 #include "Player.h"
+
 using namespace std;
 int main()
 {
