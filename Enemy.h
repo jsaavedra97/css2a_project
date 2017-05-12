@@ -1,6 +1,5 @@
 #ifndef ENEMY_H_INCLUDED
 #define ENEMY_H_INCLUDED
-
 //***************************************
 // Header Name: Enemy.h
 //***************************************
@@ -14,15 +13,10 @@
 #include "Ship.h"
 #include "Projectile.h"
 
-class Enemy : public Ship{
+class Enemy: public Ship{
 private:
     std::string enemy_name,
                 file_name;
-
-    // Might not be needed
-    sf::Texture enemy_texture;
-    sf::Sprite enemy_sprite;
-
     // Is important, don't touch!!
     int counter;
 

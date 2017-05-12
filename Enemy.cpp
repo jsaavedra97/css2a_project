@@ -11,8 +11,6 @@
 #include "Enemy.h"
 #include <cassert>
 
-//Enemy::file_name = "./sprites/enemy_sprites/asteroid.png";
-
 Enemy::Enemy():
 Ship("./sprites/enemy_sprites/asteroid.png", 25, 0, 0, Projectile()){
     enemy_name = "Asteroid";
@@ -34,8 +32,7 @@ bool Enemy::enemyDeadOrAlive()const{
 }
 
 void Enemy::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed){
-    if(elapsed.asSeconds() > 1.25f)
-    {
+    if(elapsed.asSeconds() > 1.25f){
         clock.restart();
         projectiles->shape.setPosition(sprite.getPosition());
         weapon_load.push_back(*projectiles);
@@ -45,10 +42,8 @@ void Enemy::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed){
         window.draw(weapon_load[i].shape);
 
     for(int i = 0; i < weapon_load.size(); i++)
-    {
         if(!weapon_load[i].update())
             weapon_load.erase(weapon_load.begin());
-    }
 }
 
 void Enemy::updateMovement(sf::RenderWindow& window){
@@ -65,7 +60,8 @@ void Enemy::updateMovement(sf::RenderWindow& window){
 }
 
 void Enemy::takeDamage(const Projectile& p){
-    // Empty for now
+    health -= p.getDamage();
+    enemyDeadOrAlive();
 }
 
 void Enemy::checkBounds(){
