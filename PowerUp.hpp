@@ -7,19 +7,17 @@
 #include <ctime>
 #include <cstdlib>
 #include "ResourcePath.hpp"
+#include "ExternalEntity.hpp"
 using namespace std;
 
-class PowerUp
+class PowerUp: public ExternalEntity
 {
 public:
     PowerUp();
-    void updatePowerUp(sf::RenderWindow::RenderWindow &window, sf::Clock &Clock, sf::Time &Time);
-    void renderPowerUp(sf::RenderWindow::RenderWindow &window);
+    PowerUp(const sf::Vector2f& dim, const string&  file_name, int category);
+    virtual bool update();
 private:
-    sf::Texture powerUp;
-    sf::Sprite powerUpSprite;
-    sf::Texture powerUp2;
-    sf::Sprite powerUpSprite2;
+    int category;
 };
 
 #endif /* PowerUp_hpp */

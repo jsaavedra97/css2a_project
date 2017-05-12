@@ -6,6 +6,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include "PowerUp.hpp"
 #include "ResourcePath.hpp"
 using namespace std;
 
@@ -15,6 +16,8 @@ public:
     Environment();
     void Update(sf::RenderWindow::RenderWindow &window, float elapsedTime);
     void Render(sf::RenderWindow::RenderWindow &window);
+    void showPowerUp(sf::RenderWindow &window, sf::Clock& clock2,sf::Time& elapsed2);
+    PowerUp getPowerUp(){return *p;}
 private:
     sf::Texture bgTex;
     sf::RectangleShape bgShape;
@@ -25,5 +28,6 @@ private:
     float bgSpeed;
     float bgY;
     float elapsedTime;
+    PowerUp *p;
 };
 #endif /* Environment_hpp */
