@@ -59,6 +59,10 @@ int main()
         env->update();
         env->updatePowerUp(clock2, elapsed2);
 
+        if(player1->getSprite().getGlobalBounds().intersects(env->getPowerUp().getGlobalBounds()))
+        {
+        }
+
         // draw
         window.draw(env->getShape());
         window.draw(env->getPowerUp());

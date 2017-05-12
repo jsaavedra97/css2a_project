@@ -23,11 +23,13 @@ class Projectile : public ExternalEntity
 
         void setDamage(int damage);
         void setSpeed(float speed);
+        void setType(int category);
 
         bool update();
-
+    private:
         int damage;
         float speed;
+        int category;
 };
 
 #endif // Projectile_H

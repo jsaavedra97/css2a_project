@@ -90,6 +90,14 @@ void Player::takeDamage(const Projectile &p)
         health -= p.getDamage();
     }
 }
+void Player::changeWeapon(int category)
+{
+    if(category == 1)
+    {
+        projectiles->setDamage(10);
+        projectiles->setType(category);
+    }
+}
 void Player::checkBounds()
 {
 

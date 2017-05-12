@@ -20,6 +20,7 @@ public:
     virtual void updateMovement(sf::RenderWindow& window);
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
     virtual void takeDamage(const Projectile &p);
+    void changeWeapon(int category);
     virtual void checkBounds();
 };
 

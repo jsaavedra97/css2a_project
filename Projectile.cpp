@@ -4,6 +4,7 @@ using namespace std;
 
 Projectile::Projectile(): ExternalEntity()
 {
+    category = 1;
     damage = 5;
     speed = -5.0f;
 }
@@ -30,7 +31,19 @@ void Projectile::setSpeed(float speed)
 {
     this->speed = speed;
 }
+void Projectile::setType(int category)
+{
+    this->category = category;
+    if(this->category == 1)
+    {
+        texture.loadFromFile("./sprites/player_sprites/smallfighter0005.png");
+    }
+    else if(this->category == 0);
+    {
+        texture.loadFromFile("./ll.png");
 
+    }
+}
 bool Projectile::update()
 {
     if(shape.getPosition().y > 0)
