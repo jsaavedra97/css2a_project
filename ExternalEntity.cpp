@@ -1,5 +1,4 @@
-#include "ExternalEntity.hpp"
-#include "ResourcePath.hpp"
+#include "ExternalEntity.h"
 #include <iostream>
 using namespace std;
 
@@ -12,8 +11,7 @@ ExternalEntity::ExternalEntity()
 }
 ExternalEntity::ExternalEntity(const sf::Vector2f& dim, const string&  file_name)
 {
-    texture.loadFromFile(resourcePath()+file_name);
-
+    texture.loadFromFile(file_name);
     shape.setSize(dim);
     shape.setFillColor(sf::Color::White);
     shape.setTexture(&texture);

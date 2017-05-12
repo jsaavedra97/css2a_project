@@ -1,4 +1,4 @@
-#include "PowerUp.hpp"
+#include "PowerUp.h"
 
 PowerUp::PowerUp():ExternalEntity()
 {
