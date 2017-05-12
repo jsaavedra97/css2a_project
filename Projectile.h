@@ -15,7 +15,7 @@ class Projectile : public ExternalEntity
         Projectile();
         Projectile(const Projectile& p);
         Projectile(int damage, float speed);
-        Projectile(const sf::Vector2f& dim, const string& file_name, int damage, float speed);
+        Projectile(const sf::Vector2f& dim, string file_name, int damage, float speed);
         virtual ~Projectile(){}
 
         int getDamage()const{return damage;}
@@ -24,7 +24,7 @@ class Projectile : public ExternalEntity
         void setDamage(int damage);
         void setSpeed(float speed);
 
-        virtual bool update();
+        bool update();
 
         int damage;
         float speed;

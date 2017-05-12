@@ -1,5 +1,5 @@
-#ifndef Environment_h
-#define Environment_h
+#ifndef ENVIRONMENT_H
+#define ENVIRONMENT_H
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <fstream>
@@ -14,10 +14,16 @@ class Environment
 {
 public:
     Environment();
-    void Update(sf::RenderWindow &window, float elapsedTime);
-    void Render(sf::RenderWindow &window);
-    void powerUpTimer(sf::RenderWindow &window, sf::Clock& clock2,sf::Time& elapsed2);
-    PowerUp getPowerUp(){return *p;}
+    ~Environment();
+    void update();
+    void updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2);
+
+    sf::RectangleShape getPowerUp(){return p->getShape();}
+    float getSpeed()const{return bgSpeed;}
+    float getBgy()const{return bgY;}
+    float getElapsedTime()const{return elapsedTime;}
+    sf::RectangleShape getShape()const{return bgShape;}
+
 private:
     sf::Texture bgTex;
     sf::RectangleShape bgShape;
@@ -28,6 +34,8 @@ private:
     float bgSpeed;
     float bgY;
     float elapsedTime;
+
     PowerUp *p;
 };
-#endif /* Environment_hpp */
+
+#endif // ENVIRONMENT_H

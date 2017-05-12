@@ -20,36 +20,36 @@ void Player::updateMovement(sf::RenderWindow& window)
          right = false;
 
     if(sprite.getGlobalBounds().top <= 0.0f)
-        sprite.move(0.0f, 0.3f);
+        sprite.move(0.0f, 0.4f);
     else if(sprite.getGlobalBounds().top >= (window.getSize().y - sprite.getGlobalBounds().height))
-        sprite.move(0.0f,-0.3f);
+        sprite.move(0.0f,-0.4f);
     else if(sprite.getGlobalBounds().left <= 0.0f)
-        sprite.move(3.0f,0.0f);
+        sprite.move(4.0f,0.0f);
     else if(sprite.getGlobalBounds().left >= (window.getSize().x - sprite.getGlobalBounds().width))
-        sprite.move(-3.0f,0.0f);
+        sprite.move(-4.0f,0.0f);
     else
     {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
-            sprite.move(-0.3f, 0.0f);
+            sprite.move(-0.4f, 0.0f);
             sprite.setTexture(texture_left);
             left = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            sprite.move(0.3f, 0.0f);
+            sprite.move(0.4f, 0.0f);
             sprite.setTexture(texture_right);
             right = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
-            sprite.move(0.0f, -0.3f);
+            sprite.move(0.0f, -0.4f);
             if(!left && !right)
                 resetSprite();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            sprite.move(0.0f, 0.3f);
+            sprite.move(0.0f, 0.4f);
             if(!left && !right)
                 resetSprite();
         }

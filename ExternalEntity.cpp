@@ -9,7 +9,7 @@ ExternalEntity::ExternalEntity()
     shape.setOrigin(10.0f, 0.0f);
     boundingBox = shape.getGlobalBounds();
 }
-ExternalEntity::ExternalEntity(const sf::Vector2f& dim, const string&  file_name)
+ExternalEntity::ExternalEntity(const sf::Vector2f& dim, string file_name)
 {
     texture.loadFromFile(file_name);
     shape.setSize(dim);

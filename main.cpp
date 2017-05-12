@@ -24,10 +24,9 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 1000), "Space Inviters", sf::Style::Close | sf::Style::Titlebar);
 
     Ship *player1 = new Player(file_left, file_mid, file_right, 100, 400.0f, 800.0f, Projectile(sf::Vector2f(20.0f,100.0f),textu,10,-1.0f));
-    Environment e;
+    Environment *env = new Environment;
 
     srand(time(NULL));
-
 
     // Start the game loop
     while (window.isOpen())
@@ -48,24 +47,26 @@ int main()
                 window.close();
             }
         }
-        sf::Time elapsed2 = clock2.getElapsedTime();
         // Clear screen
+
         sf::Time elapsed = clock.getElapsedTime();
+        sf::Time elapsed2 = clock2.getElapsedTime();
 
         window.clear();
 
         //update
-        player1->fire(window, clock, elapsed);
         player1->updateMovement(window);
-        e.Update(window, .7);
-        e.powerUpTimer(window, clock2, elapsed2);
-
+        env->update();
+        env->updatePowerUp(clock2, elapsed2);
 
         // draw
-        e.Render(window); // background
-        window.draw(player1->getSprite()); // player
-        window.draw(e.getPowerUp().getShape()); // powerup
+        window.draw(env->getShape());
+        window.draw(env->getPowerUp());
+        player1->fire(window, clock, elapsed);
+        window.draw(player1->getSprite());
         window.display();
     }
+    delete player1;
+    delete env;
     return 0;
 }

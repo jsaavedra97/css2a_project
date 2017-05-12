@@ -16,7 +16,7 @@ Projectile::Projectile(int damage, float speed):ExternalEntity()
     this->damage = damage;
     this->speed = speed;
 }
-Projectile::Projectile(const sf::Vector2f& dim,const string& file_name, int damage, float speed):ExternalEntity(dim, file_name)
+Projectile::Projectile(const sf::Vector2f& dim, string file_name, int damage, float speed):ExternalEntity(dim, file_name)
 {
     this->damage = damage;
     this->speed = speed;
