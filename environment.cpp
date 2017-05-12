@@ -40,16 +40,23 @@ void Environment::update()
 }
 void Environment::updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2)
 {
-    int x1, y1;
+    int x1, y1, power_rand;
     if (elapsed2.asSeconds() >= 4)
     {
-        clock2.restart();
-        x1 = rand()% (800 - 1)+ 1;
-        y1 = rand()% (1000 - 1) +1;
-        delete p;
-        p = new PowerUp(sf::Vector2f(50.0f,50.0f),("l.png"), 1);
-        p->setPosition(sf::Vector2f(x1, y1));
-        cout << "update" << endl;
+        if(p != NULL)
+        {
+            clock2.restart();
+            x1 = rand()% (800 - 1)+ 1;
+            y1 = rand()% (1000 - 1) +1;
+            power_rand = rand()%2;
+            delete p;
+            if(power_rand == 1)
+                p = new PowerUp(sf::Vector2f(50.0f,50.0f),("l.png"), power_rand);
+            else
+                p = new PowerUp(sf::Vector2f(50.0f,50.0f),("ll.png"), power_rand);
+            p->setPosition(sf::Vector2f(x1, y1));
+            cout << "update" << endl;
+        }
     }
 }
 Environment::~Environment()
