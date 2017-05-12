@@ -59,13 +59,14 @@ int main()
         env->update();
         env->updatePowerUp(clock2, elapsed2);
 
-        if(player1->getSprite().getGlobalBounds().intersects(env->getPowerUp().getGlobalBounds()))
+        if(player1->getSprite().getGlobalBounds().intersects(env->getPowerUp()->getShape().getGlobalBounds()))
         {
+            player1->changeWeapon(env->getPowerUp()->getCategory());
         }
 
         // draw
         window.draw(env->getShape());
-        window.draw(env->getPowerUp());
+        window.draw(env->getPowerUp()->getShape());
         player1->fire(window, clock, elapsed);
         window.draw(player1->getSprite());
         window.display();

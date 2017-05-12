@@ -14,7 +14,7 @@ class PowerUp: public ExternalEntity
 public:
     PowerUp();
     PowerUp(const sf::Vector2f& dim, string file_name, int category);
-
+    int getCategory()const{return category;}
 private:
     int category;
 };

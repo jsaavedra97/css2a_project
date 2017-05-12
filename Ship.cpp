@@ -47,6 +47,7 @@ void Ship::setPosition(float x, float y)
     assert(x > 0 && y > 0); // need to assert upper-bound
     sprite.setPosition(x,y);
 }
+
 void Ship::resetSprite()
 {
     sprite.setTexture(texture_mid);

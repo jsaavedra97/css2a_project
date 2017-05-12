@@ -92,13 +92,20 @@ void Player::takeDamage(const Projectile &p)
 }
 void Player::changeWeapon(int category)
 {
-    if(category == 1)
+    if(category == 0)
     {
-        projectiles->setDamage(10);
-        projectiles->setType(category);
+        delete projectiles;
+        projectiles = new Projectile(sf::Vector2f(20.0f,100.0f),"./sprites/player_sprites/smallfighter0005.png", 100, -5.0f);
+        cout << "changed" << endl;
+    }
+    else if(category == 1)
+    {
+        delete projectiles;
+        projectiles = new Projectile(sf::Vector2f(20.0f,100.0f),"ll.png", 10, -2.0f);
+        cout << "changed" << endl;
     }
 }
-void Player::checkBounds()
+void Player::checkBounds(sf::RectangleShape &r)
 {
 
 }

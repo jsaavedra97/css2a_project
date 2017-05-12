@@ -25,7 +25,8 @@ public:
     virtual void updateMovement(sf::RenderWindow& window)=0;
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)=0;
     virtual void takeDamage(const Projectile &p)=0;
-    virtual void checkBounds()=0;
+    virtual void checkBounds(sf::RectangleShape &r)=0;
+    virtual void changeWeapon(int category)=0;
     virtual ~Ship(){delete projectiles;}
 
 protected:
