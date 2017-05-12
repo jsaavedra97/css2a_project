@@ -15,6 +15,8 @@ public:
     Player(string file_mid, int health, float x, float y ,const Projectile& p );
     Player(string file_left, string file_mid, string file_right,
            int health, float x, float y,const Projectile& p);
+    virtual ~Player(){}
+
     virtual void updateMovement(sf::RenderWindow& window);
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
     virtual void takeDamage(const Projectile &p);

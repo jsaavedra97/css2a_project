@@ -15,6 +15,7 @@ class Projectile
         Projectile(const Projectile& p);
         Projectile(int damage, float speed);
         Projectile(sf::Vector2f dim, int damage, float speed);
+        virtual ~Projectile(){}
 
         int getDamage()const{return damage;}
         int getSpeed()const{return speed;}

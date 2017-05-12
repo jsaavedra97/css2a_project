@@ -12,7 +12,7 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(800, 1000), "SFML", sf::Style::Close | sf::Style::Titlebar);
 
-    Ship *player1 = new Player(file_left, file_mid, file_right, 100, 400.0f, 800.0f,Projectile());
+    Ship *player1 = new Player(file_left, file_mid, file_right, 100, 400.0f, 800.0f, Projectile());
 
     while (window.isOpen())
     {
@@ -35,9 +35,7 @@ int main()
             }
         }
         sf::Time elapsed = clock.getElapsedTime();
-
         window.clear();
-//        cout << elapsed.asSeconds() << endl;
         player1->fire(window, clock, elapsed);
         player1->updateMovement(window);
         window.draw(player1->getSprite());
