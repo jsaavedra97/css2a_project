@@ -10,9 +10,11 @@ int main()
     string file_mid = "./sprites/player_sprites/smallfighter0005.png";
     string file_right = "./sprites/player_sprites/smallfighter0010.png";
 
+    string textu = "./sprites/player_sprites/smallfighter0005.png";
+
     sf::RenderWindow window(sf::VideoMode(800, 1000), "SFML", sf::Style::Close | sf::Style::Titlebar);
 
-    Ship *player1 = new Player(file_left, file_mid, file_right, 100, 400.0f, 800.0f, Projectile());
+    Ship *player1 = new Player(file_left, file_mid, file_right, 100, 400.0f, 800.0f, Projectile(sf::Vector2f(20.0f,100.0f),textu,10,-1.0f));
 
     while (window.isOpen())
     {

@@ -2,37 +2,29 @@
 #define Projectile_H
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include "ExternalEntity.h"
 #include <string>
 #include <cassert>
 #include <iostream>
 
 using namespace std;
 
-class Projectile
+class Projectile : public ExternalEntity
 {
     public:
         Projectile();
         Projectile(const Projectile& p);
         Projectile(int damage, float speed);
-        Projectile(sf::Vector2f dim, int damage, float speed);
+        Projectile(const sf::Vector2f& dim, const string& file_name, int damage, float speed);
         virtual ~Projectile(){}
 
         int getDamage()const{return damage;}
         int getSpeed()const{return speed;}
 
-        sf::RectangleShape getShape()const{return shape;}
-        sf::FloatRect getBoundingBox()const{return boundingBox;}
-
         void setDamage(int damage);
         void setSpeed(float speed);
-        void setPosition(sf::Vector2f xy);
 
-        bool update();
-
-//    private:
-        sf::RectangleShape shape;
-        sf::Texture texture;
-        sf::FloatRect boundingBox;
+        virtual bool update();
 
         int damage;
         float speed;

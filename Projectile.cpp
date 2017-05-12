@@ -1,36 +1,25 @@
 #include "Projectile.h"
+#include <iostream>
+using namespace std;
 
-
-Projectile::Projectile()
+Projectile::Projectile(): ExternalEntity()
 {
     damage = 5;
     speed = -5.0f;
-    shape.setSize(sf::Vector2f(20.0f, 100.0f));
-    shape.setFillColor(sf::Color::White);
-    shape.setOrigin(10.0f, 0.0f);
-    boundingBox = shape.getGlobalBounds();
 }
-Projectile::Projectile(const Projectile& p)
+Projectile::Projectile(const Projectile& p): ExternalEntity()
 {
     *this = p;
 }
-Projectile::Projectile(int damage, float speed)
+Projectile::Projectile(int damage, float speed):ExternalEntity()
 {
     this->damage = damage;
     this->speed = speed;
-    shape.setSize(sf::Vector2f(20.0f, 100.0f));
-    shape.setFillColor(sf::Color::White);
-    shape.setOrigin(10.0f, 0.0f);
-    boundingBox = shape.getGlobalBounds();
 }
-Projectile::Projectile(sf::Vector2f dim, int damage, float speed)
+Projectile::Projectile(const sf::Vector2f& dim,const string& file_name, int damage, float speed):ExternalEntity(dim, file_name)
 {
     this->damage = damage;
     this->speed = speed;
-    shape.setSize(dim);
-    shape.setFillColor(sf::Color::White);
-    shape.setOrigin(dim.x/2, 0.0f);
-    boundingBox = shape.getGlobalBounds();
 }
 void Projectile::setDamage(int damage)
 {
@@ -41,10 +30,7 @@ void Projectile::setSpeed(float speed)
 {
     this->speed = speed;
 }
-void Projectile::setPosition(sf::Vector2f xy)
-{
-    shape.setPosition(xy);
-}
+
 bool Projectile::update()
 {
     if(shape.getPosition().y > 0)
@@ -54,7 +40,6 @@ bool Projectile::update()
     }
     else
     {
-        cout << "Collision" << endl;
         return false;
     }
 }
