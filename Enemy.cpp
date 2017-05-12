@@ -1,13 +1,10 @@
 //***************************************
-//
 // Filename: Enemy.cpp
 // Name: Joshua Saavedra
 // Last Modified: 3/17/2017
 // Description: This is the implementation
 // file for the Enemy.h header
-//
 //***************************************
-
 #include "Enemy.h"
 #include <cassert>
 
@@ -16,11 +13,15 @@ Ship("./sprites/enemy_sprites/asteroid.png", 25, 0, 0, Projectile()){
     enemy_name = "Asteroid";
     sprite.setRotation(180.0f);
     counter = 0;
+    movement_type = 64; // Just an arbitrary number
 }
 
-Enemy::Enemy(std::string file_name, int health, float x, float y, const Projectile& p, std::string enemy_name):
+Enemy::Enemy(std::string file_name, int health, float x, float y, const Projectile& p, std::string enemy_name, int movement_type):
 Ship(file_name, health, x, y, p){
+    assert(!enemy_name.empty());
+    assert(movement_type != 0);
     this->enemy_name = enemy_name;
+    this->movement_type = movement_type;
     sprite.setRotation(180.0f);
     counter = 0;
 }
@@ -38,24 +39,54 @@ void Enemy::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed){
         weapon_load.push_back(*projectiles);
     }
 
-    for(int i = 0; i < weapon_load.size(); i++)
+    for(unsigned int i = 0; i < weapon_load.size(); i++)
         window.draw(weapon_load[i].shape);
 
-    for(int i = 0; i < weapon_load.size(); i++)
+    for(unsigned int i = 0; i < weapon_load.size(); i++)
         if(!weapon_load[i].update())
             weapon_load.erase(weapon_load.begin());
 }
 
 void Enemy::updateMovement(sf::RenderWindow& window){
-    if(sprite.getPosition().x <= window.getSize().x - 65 && counter == 0){
-        sprite.move(0.1f, 0.0f);
-        if(sprite.getPosition().x > window.getSize().x - 65)
-            counter = 1;
-    }
-    if(sprite.getPosition().x >= window.getSize().x - 65 || (sprite.getPosition().x >= 65 && counter == 1)){
-        sprite.move(-0.1f, 0.0f);
-        if(sprite.getPosition().x < 65)
-            counter = 0;
+    switch(movement_type){
+    // Movement 1
+    case 1:
+        if(sprite.getPosition().x <= window.getSize().x - 65 && counter == 0){
+            sprite.move(0.05f, 0.0f);
+            if(sprite.getPosition().x > window.getSize().x - 65)
+                counter = 1;
+        }
+        else if(sprite.getPosition().x >= window.getSize().x - 65 || (sprite.getPosition().x >= 65 && counter == 1)){
+            sprite.move(-0.05f, 0.0f);
+            if(sprite.getPosition().x < 65)
+                counter = 0;
+        }
+
+        if(sprite.getPosition().y < 1250)
+            sprite.move(0.0f, 0.02f);
+        break;
+
+    // Movement 2
+    case 2:
+        if(sprite.getPosition().x >= 65 && counter == 0){
+            sprite.move(-0.05f, 0.0f);
+            if(sprite.getPosition().x < 65)
+                counter = 1;
+        }
+        if(sprite.getPosition().x <= 65 || (sprite.getPosition().x <= window.getSize().x - 65 && counter == 1)){
+            sprite.move(0.05f, 0.0f);
+            if(sprite.getPosition().x > window.getSize().x - 65)
+                counter = 0;
+        }
+        if(sprite.getPosition().y < 1250)
+            sprite.move(0.0f, 0.02f);
+        break;
+
+    // Default Movement
+    default:
+        if(sprite.getPosition().y < 1250)
+            sprite.move(0.0f, 0.05f);
+        break;
     }
 }
 

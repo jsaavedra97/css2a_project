@@ -5,7 +5,7 @@
 //***************************************
 //***************************************
 // Description: This class will create
-// a basic enemy object for a game
+// a basic enemy ship object
 //***************************************
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -19,17 +19,20 @@ private:
                 file_name;
     // Is important, don't touch!!
     int counter;
+    // Determines Enemy movement pattern
+    int movement_type;
 
 public:
-
-    //Constructors
+    // Constructors
     Enemy();
-    Enemy(std::string file_name, int health, float x, float y, const Projectile& p, std::string enemy_name);
+    Enemy(std::string file_name, int health, float x, float y, const Projectile& p, std::string enemy_name, int movement_type);
 
-    //Mutators
+    // Mutators
     void setEnemyName(std::string enemy_name){this->enemy_name = enemy_name;}
-    //Accessors
+
+    // Accessors
     std::string getEnemyName()const{return enemy_name;}
+
     //Other Methods
     bool enemyDeadOrAlive()const;
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
