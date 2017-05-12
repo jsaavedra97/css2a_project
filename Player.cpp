@@ -3,15 +3,16 @@ using namespace std;
 
 Player::Player() : Ship()
 {
+    projectiles->setSpeed(-1.0f);
 }
-Player::Player(string file_mid, int health, float x, float y ) : Ship(file_mid, health, x, y)
+Player::Player(string file_mid, int health, float x, float y,sf::Vector2f dim, int damage, float speed  ) : Ship(file_mid, health, x, y, dim, damage, speed)
 {
-
+    projectiles->setSpeed(-1.0f);
 }
 Player::Player(string file_left, string file_mid, string file_right,
-               int health, float x, float y ) : Ship(file_left, file_mid, file_right, health, x, y)
+               int health, float x, float y,sf::Vector2f dim, int damage, float speed ) : Ship(file_left, file_mid, file_right, health, x, y, dim, damage, speed)
 {
-
+    projectiles->setSpeed(-1.0f);
 }
 void Player::updateMovement(sf::RenderWindow& window)
 {
@@ -87,6 +88,7 @@ void Player::checkBounds()
 {
 
 }
+
 
 
 
