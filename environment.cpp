@@ -59,6 +59,14 @@ void Environment::updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2)
         }
     }
 }
+void Environment::changePowerUp(sf::Sprite s)
+{
+    if(p->checkBounds(s))
+    {
+        delete p;
+        p = new PowerUp;
+    }
+}
 Environment::~Environment()
 {
     delete p;

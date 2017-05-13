@@ -18,11 +18,13 @@ public:
     void update();
     void updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2);
 
-    sf::RectangleShape getPowerUp(){return p->getShape();}
+    PowerUp *getPowerUp(){return p;}
     float getSpeed()const{return bgSpeed;}
     float getBgy()const{return bgY;}
     float getElapsedTime()const{return elapsedTime;}
     sf::RectangleShape getShape()const{return bgShape;}
+    void changePowerUp(sf::Sprite s);
+
 
 private:
     sf::Texture bgTex;

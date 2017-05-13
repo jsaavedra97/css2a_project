@@ -66,7 +66,6 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
         {
             projectiles->shape.setPosition(sprite.getPosition());
             weapon_load.push_back(*projectiles);
-            cout << "hello" << endl;
 
         }
     }
@@ -78,7 +77,6 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
         if(!weapon_load[i].update())
         {
             weapon_load.erase(weapon_load.begin());
-            cout << "goodbye" << endl;
 
         }
     }
@@ -105,9 +103,12 @@ void Player::changeWeapon(int category)
         cout << "changed" << endl;
     }
 }
-void Player::checkBounds(sf::RectangleShape &r)
+void Player::checkBounds(const PowerUp *p)
 {
-
+    if(sprite.getGlobalBounds().intersects(p->getShape().getGlobalBounds()))
+    {
+        changeWeapon(p->getCategory());
+    }
 }
 
 

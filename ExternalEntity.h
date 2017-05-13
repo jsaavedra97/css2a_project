@@ -17,6 +17,8 @@ class ExternalEntity
         sf::RectangleShape getShape()const{return shape;}
         sf::FloatRect getBoundingBox()const{return boundingBox;}
         void setPosition(sf::Vector2f xy);
+        bool checkBounds(sf::RectangleShape &r);
+        bool checkBounds(sf::Sprite &s);
 
         sf::RectangleShape shape;
         sf::Texture texture;

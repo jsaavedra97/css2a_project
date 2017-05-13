@@ -6,7 +6,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-#include "../ExternalEntity.h"
+#include "ExternalEntity.h"
 using namespace std;
 
 class PowerUp: public ExternalEntity
@@ -15,6 +15,8 @@ public:
     PowerUp();
     PowerUp(const sf::Vector2f& dim, string file_name, int category);
     int getCategory()const{return category;}
+//    bool checkBounds(sf::RectangleShape &r);
+//    bool checkBounds(sf::Sprite &s);
 private:
     int category;
 };

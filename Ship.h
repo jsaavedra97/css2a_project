@@ -8,6 +8,7 @@
 #include <cassert>
 #include <iostream>
 #include "Projectile.h"
+#include "PowerUp.h"
 
 using namespace std;
 
@@ -25,7 +26,7 @@ public:
     virtual void updateMovement(sf::RenderWindow& window)=0;
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)=0;
     virtual void takeDamage(const Projectile &p)=0;
-    virtual void checkBounds(sf::RectangleShape &r)=0;
+    virtual void checkBounds(const PowerUp *p)=0;
     virtual void changeWeapon(int category)=0;
     virtual ~Ship(){delete projectiles;}
 

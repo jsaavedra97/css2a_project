@@ -21,6 +21,24 @@ ExternalEntity::ExternalEntity(const sf::Vector2f& dim, string file_name)
 void ExternalEntity::setPosition(sf::Vector2f xy)
 {
     shape.setPosition(xy);
+
 }
+bool ExternalEntity::checkBounds(sf::RectangleShape &r)
+{
+    if(shape.getGlobalBounds().intersects(r.getGlobalBounds()))
+    {
+        return true;
+    }
+    return false;
+}
+bool ExternalEntity::checkBounds(sf::Sprite &s)
+{
+    if(shape.getGlobalBounds().intersects(s.getGlobalBounds()))
+    {
+        return true;
+    }
+    return false;
+}
+
 
 
