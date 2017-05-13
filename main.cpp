@@ -57,12 +57,13 @@ int main()
         player1->updateMovement(window);
         env->update();
         env->updatePowerUp(clock2, elapsed2);
-
         player1->checkBounds(env->getPowerUp());
         env->changePowerUp(player1->getSprite(),clock2,elapsed2);
         // draw
-        window.draw(env->getShape());
+        window.draw( env->getShape());
+
         window.draw(env->getPowerUp()->getShape());
+
         player1->fire(window, clock, elapsed);
         window.draw(player1->getSprite());
         window.display();

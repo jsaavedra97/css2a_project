@@ -40,20 +40,20 @@ void Environment::update()
 }
 void Environment::updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2)
 {
-    int x1, y1, power_rand;
-    if (elapsed2.asSeconds() >= 4)
+    int x1, y1, category;
+    if (elapsed2.asSeconds() >= 10)
     {
         if(p != NULL)
         {
             clock2.restart();
             x1 = rand()% (800 - 1)+ 1;
             y1 = rand()% (1000 - 1) +1;
-            power_rand = rand()%2;
+            category = rand()%2;
             delete p;
-            if(power_rand == 1)
-                p = new PowerUp(sf::Vector2f(50.0f,50.0f),("l.png"), power_rand);
+            if(category == 1)
+                p = new PowerUp(sf::Vector2f(50.0f,50.0f),("l.png"), category);
             else
-                p = new PowerUp(sf::Vector2f(50.0f,50.0f),("ll.png"), power_rand);
+                p = new PowerUp(sf::Vector2f(50.0f,50.0f),("ll.png"), category);
             p->setPosition(sf::Vector2f(x1, y1));
             cout << "update" << endl;
         }
@@ -65,11 +65,25 @@ void Environment::changePowerUp(const sf::Sprite&s,sf::Clock& clock2,sf::Time& e
     {
         int x1 = rand()% (800 - 1)+ 1;
         int y1 = rand()% (1000 - 1) +1;
+        int category = rand()%2;
         delete p;
-        p = new PowerUp;
-        p->setPosition(sf::Vector2f(x1,y1));
+
         clock2.restart();
+
+        if(category == 1)
+            p = new PowerUp(sf::Vector2f(50.0f,50.0f),("l.png"), category);
+        else
+            p = new PowerUp(sf::Vector2f(50.0f,50.0f),("ll.png"), category);
+        p->setCategory(category);
+        p->setPosition(sf::Vector2f(x1,y1));
+
     }
+}
+bool Environment::powerOff()
+{
+    if(p == NULL)
+        return true;
+    return false;
 }
 Environment::~Environment()
 {

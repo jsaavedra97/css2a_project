@@ -7,7 +7,7 @@
 #include <iostream>
 
 using namespace std;
-//sdfsdfs
+
 class ExternalEntity
 {
     public:
