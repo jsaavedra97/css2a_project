@@ -15,10 +15,18 @@ public:
     PowerUp();
     PowerUp(const sf::Vector2f& dim, string file_name, int category);
     int getCategory()const{return category;}
-//    bool checkBounds(sf::RectangleShape &r);
-//    bool checkBounds(sf::Sprite &s);
+    int getDamage()const{return damage;}
+    float getSpeed()const{return speed;}
+
+    void setCategory(int category);
+    void setDamage(int damage);
+    void setSpeed(float speed);
+
+
 private:
     int category;
+    int damage;
+    float speed;
 };
 
 #endif // POWERUP_H

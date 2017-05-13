@@ -8,16 +8,17 @@ PowerUp::PowerUp(const sf::Vector2f& dim, string file_name, int category):Extern
 {
     this->category = category;
 }
-//bool PowerUp::checkBounds(sf::RectangleShape &r)
-//{
-//    if(shape.getGlobalBounds().intersects(r.getGlobalBounds()))
-//    {
-//    }
-//}
-//bool PowerUp::checkBounds(sf::Sprite &s)
-//{
-//    if(shape.getGlobalBounds().intersects(s.getGlobalBounds()))
-//    {
-//    }
-//}
-//
+void PowerUp::setCategory(int category)
+{
+    assert(category >=0 && category < 2);
+    this->category = category;
+}
+void PowerUp::setDamage(int damage)
+{
+    assert(damage > 0);
+    this->damage = damage;
+}
+void PowerUp::setSpeed(float speed)
+{
+    this->speed = speed;
+}
