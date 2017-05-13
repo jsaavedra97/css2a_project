@@ -4,7 +4,7 @@ using namespace std;
 
 ExternalEntity::ExternalEntity()
 {
-    texture.loadFromFile("");
+    texture.loadFromFile("./sprites/no_image.png");
 }
 ExternalEntity::ExternalEntity(string img_path)
 {

@@ -6,38 +6,43 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include "ExternalEntity.h"
 #include "PowerUp.h"
 
 using namespace std;
 
-class Environment
+class Environment:public ExternalEntity
 {
 public:
     Environment();
-    ~Environment();
+    Environment(string img_path);
     void update();
     void updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2);
+    sf::Vector2f genRandPos();
 
-    PowerUp *getPowerUp(){return p;}
-    float getSpeed()const{return bgSpeed;}
-    float getBgy()const{return bgY;}
-    float getElapsedTime()const{return elapsedTime;}
-    sf::RectangleShape getShape()const{return bgShape;}
+    Interactable *getPowerUp(){return pu;}
+    float getScrollSpeed()const{return scroll_speed;}
+    float getYPos()const{return y_pos;}
+    float getElapsedTime()const{return elapsed_time;}
+    float getWidth()const{return width;}
+    float getHeight()const{return height;}
+
+    sf::RectangleShape getShape()const{return shape;}
     void changePowerUp(const sf::Sprite& s,sf::Clock& clock2,sf::Time& elapsed2);
     bool powerOff();
 
 private:
-    sf::Texture bgTex;
-    sf::RectangleShape bgShape;
-    sf::Vector2f bgSize;
+    sf::RectangleShape shape;
     sf::Font font;
     sf::Music music;
     sf::Image icon;
-    float bgSpeed;
-    float bgY;
-    float elapsedTime;
+    int width,
+        height;
+    float scroll_speed;
+    float y_pos;
+    float elapsed_time;
 
-    PowerUp *p;
+    Interactable *pu;
 };
 
 #endif // ENVIRONMENT_H

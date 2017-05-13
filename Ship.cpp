@@ -1,54 +1,22 @@
 #include "Ship.h"
-
+#include "Environment.h"
 using namespace std;
 
-Ship::Ship()
+Ship::Ship():ExternalEntity()
 {
-    health = 10;
-    texture_mid.loadFromFile("./sprites/no_image.png");
-    sprite.setTexture(texture_mid);
-    sprite.setOrigin(100.0f, 100.0f);
-    boundingBox = sprite.getGlobalBounds();
+    health = 0;
+    sprite.setTexture(texture);
     projectiles = new Projectile;
 }
-Ship::Ship(string file_mid, int health, float x, float y,const Projectile& p)
+Ship::Ship(string img_path, int health, Projectile& p, sf::Vector2f start_pos, Environment& e):ExternalEntity(img_path)
 {
+    assert(img_path != "");
     assert(health > 1);
-    assert(file_mid != "");
-    assert(x > 0 && y > 0); // need to assert upper-bounds
-
+    assert(start_pos.x > 0 && start_pos.y > 0 && start_pos.x < e.getWidth() && start_pos.y < e.getHeight())
     this->health = health;
-    texture_mid.loadFromFile(file_mid);
-    sprite.setTexture(texture_mid);
-    sprite.setPosition(x,y);
+
+    sprite.setPosition(start_pos);
     sprite.setOrigin(sprite.getLocalBounds().width/2, 0);
-    boundingBox = sprite.getGlobalBounds();
     projectiles = new Projectile(p);
 }
-Ship::Ship(string file_left, string file_mid, string file_right,
-           int health, float x, float y,const Projectile& p)
-{
-    assert(health > 1);
-    assert(file_mid != "");
-    assert(x > 0 && y > 0); // need to assert upper-bounds
 
-    this->health = health;
-    texture_left.loadFromFile(file_left);
-    texture_mid.loadFromFile(file_mid);
-    texture_right.loadFromFile(file_right);
-    sprite.setTexture(texture_mid);
-    sprite.setPosition(x,y);
-    sprite.setOrigin(sprite.getLocalBounds().width/2, 0);
-    boundingBox = sprite.getGlobalBounds();
-    projectiles = new Projectile(p);
-}
-void Ship::setPosition(float x, float y)
-{
-    assert(x > 0 && y > 0); // need to assert upper-bound
-    sprite.setPosition(x,y);
-}
-
-void Ship::resetSprite()
-{
-    sprite.setTexture(texture_mid);
-}

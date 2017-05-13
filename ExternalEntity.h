@@ -27,9 +27,9 @@ class ExternalEntity
 //        void setImgFile(string img_path);
 
         // Methods
-        void update();
-        virtual void checkBounds(const sf::RectangleShape& r){}
-        virtual void checkBounds(const sf::Sprite& s){}
+        virtual void update()=0;
+        virtual bool checkBounds(const sf::RectangleShape& r)=0;
+        virtual bool checkBounds(const sf::Sprite& s)=0;
 
     protected:
 //        string img_path;

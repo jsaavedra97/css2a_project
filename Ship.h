@@ -11,31 +11,23 @@
 
 using namespace std;
 
-class Ship
+class Ship : public ExternalEntity
 {
 public:
     Ship();
-    Ship(string file_mid, int health, float x, float y, const Projectile& p );
-    Ship(string file_left, string file_mid, string file_right, int health, float x, float y, const Projectile& p);
+    Ship(string img_path, int health, Projectile& p, sf::Vector2f start_pos, Environment& e);
+
     sf::Sprite getSprite()const{return sprite;}
-    sf::FloatRect getBoundingBox()const{return boundingBox;}
     Projectile getProjectile(){return *projectiles;}
-    void setPosition(float x, float y);
-    void resetSprite();
-    virtual void updateMovement(sf::RenderWindow& window)=0;
+
+    virtual void update(sf::RenderWindow& window)=0;
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)=0;
     virtual void takeDamage(const Projectile &p)=0;
-    virtual void checkBounds(const PowerUp *p)=0;
-    virtual void changeWeapon(const int& category)=0;
-    virtual ~Ship(){delete projectiles;}
+    virtual bool isDead()=0;
 
 protected:
     int health;
     sf::Sprite sprite;
-    sf::Texture texture_left;
-    sf::Texture texture_mid;
-    sf::Texture texture_right;
-    sf::FloatRect boundingBox;
     Projectile *projectiles;
     vector<Projectile>weapon_load;
 };
