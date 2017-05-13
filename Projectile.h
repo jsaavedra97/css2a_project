@@ -14,19 +14,22 @@ class Projectile : public ExternalEntity
     public:
         Projectile();
         Projectile(const Projectile& p);
-        Projectile(int damage, float speed);
-        Projectile(const sf::Vector2f& dim, string file_name, int damage, float speed);
-        virtual ~Projectile(){}
+        Projectile(string img_path, int damage, float speed, int category);
 
         int getDamage()const{return damage;}
         int getSpeed()const{return speed;}
-
         void setDamage(int damage);
         void setSpeed(float speed);
-        void setType(int category);
 
         bool update();
+        sf::Vector2f getPos()const{return shape.getPosition();}
+        sf::Vector2f getSize()const{return shape.getSize();}
+        void setPos(sf::Vector2f position);
+        void setSize(sf::Vector2f s_size);
+        void checkBounds(const sf::RectangleShape& r);
+        void checkBounds(const sf::Sprite& s);
     private:
+        sf::RectangleShape shape;
         int damage;
         float speed;
         int category;

@@ -3,23 +3,19 @@ using namespace std;
 
 Projectile::Projectile(): ExternalEntity()
 {
-    category = 1;
     damage = 5;
     speed = -5.0f;
+    category = 1;
 }
 Projectile::Projectile(const Projectile& p): ExternalEntity()
 {
     *this = p;
 }
-Projectile::Projectile(int damage, float speed):ExternalEntity()
+Projectile::Projectile(string img_path, int damage, float speed, int category):ExternalEntity(img_path)
 {
     this->damage = damage;
     this->speed = speed;
-}
-Projectile::Projectile(const sf::Vector2f& dim, string file_name, int damage, float speed):ExternalEntity(dim, file_name)
-{
-    this->damage = damage;
-    this->speed = speed;
+    this->category = category;
 }
 void Projectile::setDamage(int damage)
 {
@@ -29,19 +25,6 @@ void Projectile::setDamage(int damage)
 void Projectile::setSpeed(float speed)
 {
     this->speed = speed;
-}
-void Projectile::setType(int category)
-{
-    this->category = category;
-    if(this->category == 1)
-    {
-        texture.loadFromFile("./sprites/player_sprites/smallfighter0005.png");
-    }
-    else if(this->category == 0);
-    {
-        texture.loadFromFile("./ll.png");
-
-    }
 }
 bool Projectile::update()
 {
@@ -54,6 +37,22 @@ bool Projectile::update()
     {
         return false;
     }
+}
+void Projectile::setPos(sf::Vector2f position)
+{
+    shape.setPosition(position);
+}
+void Projectile::setSize(sf::Vector2f s_size)
+{
+    shape.setSize(s_size);
+}
+void Projectile::checkBounds(const sf::RectangleShape& r)
+{
+
+}
+void Projectile::checkBounds(const sf::Sprite& s)
+{
+
 }
 
 

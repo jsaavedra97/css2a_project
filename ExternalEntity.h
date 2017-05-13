@@ -12,18 +12,30 @@ class ExternalEntity
 {
     public:
         ExternalEntity();
-        ExternalEntity(const sf::Vector2f& dim,string file_name);
+        ExternalEntity(string img_path);
         virtual ~ExternalEntity(){}
-        sf::RectangleShape getShape()const{return shape;}
-        sf::FloatRect getBoundingBox()const{return boundingBox;}
-        void setPosition(const sf::Vector2f& xy);
-        bool checkBounds(const sf::RectangleShape &r);
-        bool checkBounds(const sf::Sprite &s);
 
-        sf::RectangleShape shape;
+        // Accessor
+        virtual sf::Vector2f getPos()const=0;
+        virtual sf::Vector2f getSize()const=0;
+//        string getImgFile()const{return img_path;}
+
+        //Mutator
+        virtual void setPos(sf::Vector2f position)=0;
+        virtual void setSize(sf::Vector2f s_size)=0;
+        void setTexture(string img_file);
+//        void setImgFile(string img_path);
+
+        // Methods
+        void update();
+        virtual void checkBounds(const sf::RectangleShape& r){}
+        virtual void checkBounds(const sf::Sprite& s){}
+
+    protected:
+//        string img_path;
         sf::Texture texture;
-        sf::FloatRect boundingBox;
-
+//        sf::Vector2f position;
+//        sf::Vector2f dim;
 };
 
 #endif // EXTERNALENTITY_H

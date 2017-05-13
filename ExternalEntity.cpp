@@ -4,40 +4,15 @@ using namespace std;
 
 ExternalEntity::ExternalEntity()
 {
-    shape.setSize(sf::Vector2f(20.0f, 20.0f));
-    shape.setFillColor(sf::Color::White);
-    shape.setOrigin(10.0f, 0.0f);
-    boundingBox = shape.getGlobalBounds();
+    texture.loadFromFile("");
 }
-ExternalEntity::ExternalEntity(const sf::Vector2f& dim, string file_name)
+ExternalEntity::ExternalEntity(string img_path)
 {
-    texture.loadFromFile(file_name);
-    shape.setSize(dim);
-    shape.setFillColor(sf::Color::White);
-    shape.setTexture(&texture);
-    shape.setOrigin(dim.x/2, 0.0f);
-    boundingBox = shape.getGlobalBounds();
+    texture.loadFromFile(img_path);
 }
-void ExternalEntity::setPosition(const sf::Vector2f& xy)
+void ExternalEntity::setTexture(string img_path)
 {
-    shape.setPosition(xy);
-
-}
-bool ExternalEntity::checkBounds(const sf::RectangleShape &r)
-{
-    if(shape.getGlobalBounds().intersects(r.getGlobalBounds()))
-    {
-        return true;
-    }
-    return false;
-}
-bool ExternalEntity::checkBounds(const sf::Sprite &s)
-{
-    if(shape.getGlobalBounds().intersects(s.getGlobalBounds()))
-    {
-        return true;
-    }
-    return false;
+    texture.loadFromFile(img_path);
 }
 
 
