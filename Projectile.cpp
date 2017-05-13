@@ -1,5 +1,4 @@
 #include "Projectile.h"
-#include <iostream>
 using namespace std;
 
 Projectile::Projectile(): ExternalEntity()

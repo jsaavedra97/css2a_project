@@ -23,7 +23,7 @@ public:
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
     virtual void takeDamage(const Projectile &p);
     virtual void checkBounds(const PowerUp *p);
-    virtual void changeWeapon(int category);
+    virtual void changeWeapon(const int& category);
 };
 
 

@@ -2,7 +2,6 @@
 #define SHIP_H
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include <deque>
 #include <vector>
 #include <string>
 #include <cassert>
@@ -27,7 +26,7 @@ public:
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)=0;
     virtual void takeDamage(const Projectile &p)=0;
     virtual void checkBounds(const PowerUp *p)=0;
-    virtual void changeWeapon(int category)=0;
+    virtual void changeWeapon(const int& category)=0;
     virtual ~Ship(){delete projectiles;}
 
 protected:

@@ -18,12 +18,12 @@ ExternalEntity::ExternalEntity(const sf::Vector2f& dim, string file_name)
     shape.setOrigin(dim.x/2, 0.0f);
     boundingBox = shape.getGlobalBounds();
 }
-void ExternalEntity::setPosition(sf::Vector2f xy)
+void ExternalEntity::setPosition(const sf::Vector2f& xy)
 {
     shape.setPosition(xy);
 
 }
-bool ExternalEntity::checkBounds(sf::RectangleShape &r)
+bool ExternalEntity::checkBounds(const sf::RectangleShape &r)
 {
     if(shape.getGlobalBounds().intersects(r.getGlobalBounds()))
     {
@@ -31,7 +31,7 @@ bool ExternalEntity::checkBounds(sf::RectangleShape &r)
     }
     return false;
 }
-bool ExternalEntity::checkBounds(sf::Sprite &s)
+bool ExternalEntity::checkBounds(const sf::Sprite &s)
 {
     if(shape.getGlobalBounds().intersects(s.getGlobalBounds()))
     {

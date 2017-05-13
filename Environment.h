@@ -23,7 +23,7 @@ public:
     float getBgy()const{return bgY;}
     float getElapsedTime()const{return elapsedTime;}
     sf::RectangleShape getShape()const{return bgShape;}
-    void changePowerUp(sf::Sprite s);
+    void changePowerUp(const sf::Sprite& s,sf::Clock& clock2,sf::Time& elapsed2);
 
 
 private:

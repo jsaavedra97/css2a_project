@@ -59,12 +59,16 @@ void Environment::updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2)
         }
     }
 }
-void Environment::changePowerUp(sf::Sprite s)
+void Environment::changePowerUp(const sf::Sprite&s,sf::Clock& clock2,sf::Time& elapsed2 )
 {
     if(p->checkBounds(s))
     {
+        int x1 = rand()% (800 - 1)+ 1;
+        int y1 = rand()% (1000 - 1) +1;
         delete p;
         p = new PowerUp;
+        p->setPosition(sf::Vector2f(x1,y1));
+        clock2.restart();
     }
 }
 Environment::~Environment()

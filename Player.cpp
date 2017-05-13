@@ -59,16 +59,17 @@ void Player::updateMovement(sf::RenderWindow& window)
 }
 void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 {
-    if(elapsed.asSeconds() > 0.1)
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        clock.restart();
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        if(elapsed.asSeconds() > 0.5)
         {
             projectiles->shape.setPosition(sprite.getPosition());
             weapon_load.push_back(*projectiles);
-
+            clock.restart();
         }
     }
+
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
         window.draw(weapon_load[i].shape);
 
@@ -77,7 +78,6 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
         if(!weapon_load[i].update())
         {
             weapon_load.erase(weapon_load.begin());
-
         }
     }
 }
@@ -88,7 +88,7 @@ void Player::takeDamage(const Projectile &p)
         health -= p.getDamage();
     }
 }
-void Player::changeWeapon(int category)
+void Player::changeWeapon(const int& category)
 {
     if(category == 0)
     {

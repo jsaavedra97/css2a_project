@@ -3,7 +3,6 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-#include "ResourcePath.h"
 #include "Environment.h"
 #include "PowerUp.h"
 #include "Player.h"
@@ -59,12 +58,8 @@ int main()
         env->update();
         env->updatePowerUp(clock2, elapsed2);
 
-//        if(player1->getSprite().getGlobalBounds().intersects(env->getPowerUp()->getShape().getGlobalBounds()))
-//        {
-//            player1->changeWeapon(env->getPowerUp()->getCategory());
-//        }
         player1->checkBounds(env->getPowerUp());
-        env->changePowerUp(player1->getSprite());
+        env->changePowerUp(player1->getSprite(),clock2,elapsed2);
         // draw
         window.draw(env->getShape());
         window.draw(env->getPowerUp()->getShape());
