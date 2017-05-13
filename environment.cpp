@@ -9,16 +9,19 @@ Environment::Environment():ExternalEntity()
     scroll_speed = 0.3;
     elapsed_time = 0.7;
 
-    texture.loadFromFile("./background.png");
+    texture[0].loadFromFile("./background.png");
     font.loadFromFile("./sansation.ttf");
     music.openFromFile("./spacenice.ogg");
     icon.loadFromFile("./shipIcon.png");
-    texture.setSmooth(false);
-    texture.setRepeated(true);
+
+    texture[0].setSmooth(false);
+    texture[0].setRepeated(true);
+
+
 
     y_pos = shape.getPosition().y;
 
-    shape.setTexture(&texture);
+    shape.setTexture(&texture[0]);
     shape.setSize(sf::Vector2f(width, height));
 
     pu = new PowerUp;
@@ -27,7 +30,7 @@ Environment::Environment():ExternalEntity()
     music.play();
 
 }
-Environment::Environment(string img_path):ExternalEntity(img_path)
+Environment::Environment(string *img_path_arr, int num_textures):ExternalEntity(img_path_arr, num_textures)
 {
     width = 800;
     height = 1000;
@@ -37,13 +40,16 @@ Environment::Environment(string img_path):ExternalEntity(img_path)
     font.loadFromFile("./sansation.ttf");
     music.openFromFile("./spacenice.ogg");
     icon.loadFromFile("./shipIcon.png");
-    texture.setSmooth(false);
-    texture.setRepeated(true);
+
+
+    texture[0].setSmooth(false);
+    texture[0].setRepeated(true);
+    shape.setTexture(&texture[0]);
+    shape.setSize(sf::Vector2f(width, height));
 
     y_pos = shape.getPosition().y;
 
-    shape.setTexture(&texture);
-    shape.setSize(sf::Vector2f(width, height));
+
 
     pu = new PowerUp;
     pu->setPos(genRandPos());
@@ -51,7 +57,7 @@ Environment::Environment(string img_path):ExternalEntity(img_path)
     music.play();
 
 }
-void Environment::update()
+void Environment::update(sf::RenderWindow& window)
 {
     if(y_pos <= 0.6 * height)
         y_pos -= scroll_speed * elapsed_time;

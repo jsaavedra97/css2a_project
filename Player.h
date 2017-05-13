@@ -8,22 +8,16 @@ using namespace std;
 
 class Player : public Ship
 {
-private:
-    static string file_left;
-    static string file_mid;
-    static string file_right;
 public:
     Player();
-    Player(string file_mid, int health, float x, float y ,const Projectile& p );
-    Player(string file_left, string file_mid, string file_right,
-           int health, float x, float y,const Projectile& p);
-    virtual ~Player(){}
+    Player(string *img_path_arr, int num_textures, int health, Projectile& p, sf::Vector2f start_pos, Environment& e);
 
-    virtual void updateMovement(sf::RenderWindow& window);
-    virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
-    virtual void takeDamage(const Projectile &p);
-    virtual void checkBounds(const PowerUp *p);
-    virtual void changeWeapon(const int& category);
+    void update(sf::RenderWindow& window);
+    void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
+    void takeDamage(const Projectile &p);
+    bool checkBounds(const sf::RectangleShape& r);
+    bool checkBounds(const sf::Sprite& s);
+    void changeWeapon(const int& category);
 };
 
 

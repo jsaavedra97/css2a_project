@@ -7,7 +7,7 @@ Interactable::Interactable(): ExternalEntity()
     speed = -5.0f;
     category = 1;
 }
-Interactable::Interactable(string img_path, int damage, float speed, int category):ExternalEntity(img_path)
+Interactable::Interactable(string *img_path_arr, int num_textures, int damage, float speed, int category):ExternalEntity(img_path_arr, num_textures)
 {
     this->damage = damage;
     this->speed = speed;
@@ -24,6 +24,10 @@ void Interactable::setSize(sf::Vector2f s_size)
 void Interactable::setCategory(int category)
 {
     this->category = category;
+}
+void Interactable::setSpeed(float speed)
+{
+    this->speed = speed;
 }
 bool Interactable::checkBounds(const sf::RectangleShape& r)
 {

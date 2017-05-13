@@ -11,12 +11,12 @@
 
 using namespace std;
 
-class Environment:public ExternalEntity
+class Environment: public ExternalEntity
 {
 public:
     Environment();
-    Environment(string img_path);
-    void update();
+    Environment(string *img_path_arr, int num_textures);
+    void update(sf::RenderWindow& window);
     void updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2);
     sf::Vector2f genRandPos();
 

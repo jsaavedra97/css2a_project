@@ -10,17 +10,21 @@ class Interactable:public ExternalEntity
 {
     public:
         Interactable();
-        Interactable(string img_path, int damage, float speed, int category);
+        Interactable(string *img_path_arr, int num_textures, int damage, float speed, int category);
 
         int getDamage()const{return damage;}
         int getSpeed()const{return speed;}
+        sf::RectangleShape getShape(){return shape;}
+
         void setDamage(int damage);
         void setSpeed(float speed);
         void setCategory(int category);
 
-        void update();
+
+        virtual void update(sf::RenderWindow& window)=0;
         sf::Vector2f getPos()const{return shape.getPosition();}
         sf::Vector2f getSize()const{return shape.getSize();}
+        sf::RectangleShape getShape()const{return shape;}
         void setPos(sf::Vector2f position);
         void setSize(sf::Vector2f s_size);
         bool checkBounds(const sf::RectangleShape& r);
