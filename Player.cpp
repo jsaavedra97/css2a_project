@@ -12,7 +12,6 @@ Player::Player(string img_path, int health, const Projectile& p, const sf::Vecto
     texture_left.loadFromFile("./sprites/player_sprites/smallfighter0001.png");
     texture_right.loadFromFile("./sprites/player_sprites/smallfighter0010.png");
     sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().left-sprite.getGlobalBounds().width/2, sprite.getPosition().y));
-
 }
 void Player::update(sf::RenderWindow& window)
 {

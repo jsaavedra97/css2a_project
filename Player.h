@@ -23,7 +23,6 @@ public:
 
 private:
     sf::Texture texture_left;
-    sf::Texture texture_mid;
     sf::Texture texture_right;
 };
 
