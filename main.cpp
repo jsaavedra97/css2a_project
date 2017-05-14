@@ -23,7 +23,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 1000), "Space Inviters", sf::Style::Close | sf::Style::Titlebar);
 
     Environment* env = new Environment;
-    Ship* player1 = new Player(file_mid,100,Projectile("l.png", 10,-0.1f, 1), sf::Vector2f(400,800), *env);
+    Ship* player1 = new Player(file_mid,100,Projectile("l.png", 10,-0.1f, 1,sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
 
     srand(time(NULL));
 

@@ -10,7 +10,7 @@ class Interactable:public ExternalEntity
 {
     public:
         Interactable();
-        Interactable(string img_path, int damage, float speed, int category);
+        Interactable(string img_path, int damage, float speed, int category, const sf::Vector2f shape_size);
 
         int getDamage()const{return damage;}
         int getSpeed()const{return speed;}

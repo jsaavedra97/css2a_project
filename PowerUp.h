@@ -13,7 +13,7 @@ class PowerUp: public Interactable
 {
 public:
     PowerUp();
-    PowerUp(string img_path, int damage, float speed, int category);
+    PowerUp(string img_path, int damage, float speed, int category,const sf::Vector2f& shape_size);
 
     double getSpawnTime()const{return spawn_time;}
     void setSpawnTime(double spawn_time);

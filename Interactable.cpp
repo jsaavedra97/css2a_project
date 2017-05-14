@@ -12,12 +12,15 @@ Interactable::Interactable(): ExternalEntity()
     texture.loadFromFile("./sprites/no_image.png");
     shape.setTexture(&texture);
 }
-Interactable::Interactable(string img_path, int damage, float speed, int category):ExternalEntity(img_path)
+Interactable::Interactable(string img_path, int damage, float speed, int category, const sf::Vector2f shape_size):ExternalEntity(img_path)
 {
     this->damage = damage;
     this->speed = speed;
     this->category = category;
-
+    shape.setSize(shape_size);
+    shape.setFillColor(sf::Color::White);
+    shape.setOrigin(shape_size.x/2, 0.0f);
+    shape.setTexture(&texture);
 }
 void Interactable::setPos(sf::Vector2f position)
 {

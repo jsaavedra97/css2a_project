@@ -5,9 +5,10 @@ Player::Player() : Ship()
 {
     projectiles->setSpeed(-1.0f);
 }
-Player::Player(string img_path, int health, const Projectile& p, sf::Vector2f start_pos, const Environment& e) : Ship(img_path, health, p, start_pos, e)
+Player::Player(string img_path, int health, const Projectile& p, const sf::Vector2f& start_pos, const Environment& e) : Ship(img_path, health, p, start_pos, e)
 {
     projectiles->setSpeed(-1.0f);
+    sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().left-sprite.getGlobalBounds().width/2, sprite.getPosition().y));
 }
 void Player::update(sf::RenderWindow& window)
 {
@@ -59,7 +60,7 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
     {
         if(elapsed.asSeconds() > 0.5)
         {
-            projectiles->setPos(sprite.getPosition());
+            projectiles->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
             weapon_load.push_back(*projectiles);
             cout << "fire" << endl;
             clock.restart();
@@ -91,13 +92,13 @@ void Player::changeWeapon(const int& category)
     if(category == 0)
     {
         delete projectiles;
-        projectiles = new Projectile("./sprites/player_sprites/smallfighter0005.png", 100, -5.0f, 0);
+        projectiles = new Projectile("./sprites/player_sprites/smallfighter0005.png", 100, -5.0f, 0, sf::Vector2f(20.0f,100.0f));
         cout << "changed" << endl;
     }
     else if(category == 1)
     {
         delete projectiles;
-        projectiles = new Projectile("ll.png", 50, -5.0f, 1);
+        projectiles = new Projectile("ll.png", 50, -5.0f, 1,sf::Vector2f(20.0f,100.0f));
         cout << "changed" << endl;
     }
 }
