@@ -6,17 +6,22 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-#include "../ExternalEntity.h"
+#include "Interactable.h"
 using namespace std;
 
-class PowerUp: public ExternalEntity
+class PowerUp: public Interactable
 {
 public:
     PowerUp();
-    PowerUp(const sf::Vector2f& dim, string file_name, int category);
+    PowerUp(string img_path, int damage, float speed, int category,const sf::Vector2f& shape_size);
+
+    double getSpawnTime()const{return spawn_time;}
+    void setSpawnTime(double spawn_time);
+    void update(sf::RenderWindow& window);
 
 private:
-    int category;
+    double spawn_time;
+
 };
 
 #endif // POWERUP_H

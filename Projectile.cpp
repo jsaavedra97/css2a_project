@@ -1,48 +1,25 @@
 #include "Projectile.h"
-#include <iostream>
 using namespace std;
 
-Projectile::Projectile(): ExternalEntity()
+Projectile::Projectile(): Interactable()
 {
-    damage = 5;
-    speed = -5.0f;
 }
-Projectile::Projectile(const Projectile& p): ExternalEntity()
+Projectile::Projectile(const Projectile& p): Interactable()
 {
     *this = p;
 }
-Projectile::Projectile(int damage, float speed):ExternalEntity()
+Projectile::Projectile(string img_path,int damage, float speed, int category, const sf::Vector2f& shape_size):Interactable(img_path, damage, speed, category, shape_size)
 {
-    this->damage = damage;
-    this->speed = speed;
 }
-Projectile::Projectile(const sf::Vector2f& dim, string file_name, int damage, float speed):ExternalEntity(dim, file_name)
-{
-    this->damage = damage;
-    this->speed = speed;
-}
-void Projectile::setDamage(int damage)
-{
-    assert(damage > 0);
-    this->damage = damage;
-}
-void Projectile::setSpeed(float speed)
-{
-    this->speed = speed;
-}
-
-bool Projectile::update()
+void Projectile::update(sf::RenderWindow& window)
 {
     if(shape.getPosition().y > 0)
     {
         shape.move(0.0f, speed);
-        return true;
+//        cout << shape.getPosition().x << " " << shape.getPosition().y << endl;
     }
     else
-    {
-        return false;
-    }
+        is_dead = true;
 }
-
 
 

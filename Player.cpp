@@ -5,16 +5,12 @@ Player::Player() : Ship()
 {
     projectiles->setSpeed(-1.0f);
 }
-Player::Player(string file_mid, int health, float x, float y, const Projectile& p  ) : Ship(file_mid, health, x, y, p)
+Player::Player(string img_path, int health, const Projectile& p, const sf::Vector2f& start_pos, const Environment& e) : Ship(img_path, health, p, start_pos, e)
 {
     projectiles->setSpeed(-1.0f);
+    sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().left-sprite.getGlobalBounds().width/2, sprite.getPosition().y));
 }
-Player::Player(string file_left, string file_mid, string file_right,
-               int health, float x, float y,const Projectile& p ) : Ship(file_left, file_mid, file_right, health, x, y, p)
-{
-    projectiles->setSpeed(-1.0f);
-}
-void Player::updateMovement(sf::RenderWindow& window)
+void Player::update(sf::RenderWindow& window)
 {
     bool left = false,
          right = false;
@@ -32,54 +28,55 @@ void Player::updateMovement(sf::RenderWindow& window)
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
             sprite.move(-0.4f, 0.0f);
-            sprite.setTexture(texture_left);
+            sprite.setTexture(texture);
             left = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
             sprite.move(0.4f, 0.0f);
-            sprite.setTexture(texture_right);
+            sprite.setTexture(texture);
             right = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
             sprite.move(0.0f, -0.4f);
             if(!left && !right)
-                resetSprite();
+                sprite.setTexture(texture);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
             sprite.move(0.0f, 0.4f);
             if(!left && !right)
-                resetSprite();
+                sprite.setTexture(texture);
         }
         if(!left && !right)
-            resetSprite();
+            sprite.setTexture(texture);
     }
 }
 void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 {
-    if(elapsed.asSeconds() > 0.1)
-    {
-        clock.restart();
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-        {
-            projectiles->shape.setPosition(sprite.getPosition());
-            weapon_load.push_back(*projectiles);
-            cout << "hello" << endl;
 
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        if(elapsed.asSeconds() > 0.5)
+        {
+            projectiles->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
+            weapon_load.push_back(*projectiles);
+            cout << "fire" << endl;
+            clock.restart();
         }
     }
+
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
         window.draw(weapon_load[i].shape);
 
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
-    {
-        if(!weapon_load[i].update())
+    {sf::RenderWindow window;
+        weapon_load[i].update(window);
+        if(weapon_load[i].isDead())
         {
             weapon_load.erase(weapon_load.begin());
-            cout << "goodbye" << endl;
-
+            cout << "hit" << endl;
         }
     }
 }
@@ -90,10 +87,30 @@ void Player::takeDamage(const Projectile &p)
         health -= p.getDamage();
     }
 }
-void Player::checkBounds()
+void Player::changeWeapon(const int& category)
 {
-
+    if(category == 0)
+    {
+        delete projectiles;
+        projectiles = new Projectile("./sprites/player_sprites/smallfighter0005.png", 100, -5.0f, 0, sf::Vector2f(20.0f,100.0f));
+        cout << "changed" << endl;
+    }
+    else if(category == 1)
+    {
+        delete projectiles;
+        projectiles = new Projectile("ll.png", 50, -5.0f, 1,sf::Vector2f(20.0f,100.0f));
+        cout << "changed" << endl;
+    }
 }
+bool Player::checkBounds(const sf::RectangleShape& r)
+{
+    return (sprite.getGlobalBounds().intersects(r.getGlobalBounds()));
+}
+bool Player::checkBounds(const sf::Sprite& s)
+{
+    return (sprite.getGlobalBounds().intersects(s.getGlobalBounds()));
+}
+
 
 
 

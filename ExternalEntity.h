@@ -7,21 +7,37 @@
 #include <iostream>
 
 using namespace std;
-//sdfsdfs
+
 class ExternalEntity
 {
     public:
         ExternalEntity();
-        ExternalEntity(const sf::Vector2f& dim,string file_name);
+        ExternalEntity(string img_path);
         virtual ~ExternalEntity(){}
-        sf::RectangleShape getShape()const{return shape;}
-        sf::FloatRect getBoundingBox()const{return boundingBox;}
-        void setPosition(sf::Vector2f xy);
 
-        sf::RectangleShape shape;
+        // Accessor
+        sf::Vector2f getPos()const{}
+        sf::Vector2f getSize()const{}
+        bool isDead()const{return is_dead;}
+//        string getImgFile()const{return img_path;}
+
+        //Mutator
+        void setPos(sf::Vector2f position);
+        void setSize(sf::Vector2f s_size);
+        void setTexture(string img_path);
+        void setIsDead(bool is_dead);
+
+//        void setImgFile(string img_path);
+
+        // Methods
+        virtual void update(sf::RenderWindow& window)=0;
+        virtual bool checkBounds(const sf::RectangleShape& r){}
+        virtual bool checkBounds(const sf::Sprite& s){}
+
+
+    protected:
         sf::Texture texture;
-        sf::FloatRect boundingBox;
-
+        bool is_dead;
 };
 
 #endif // EXTERNALENTITY_H

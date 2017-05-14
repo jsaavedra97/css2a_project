@@ -2,32 +2,20 @@
 #define Projectile_H
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include "ExternalEntity.h"
+#include "Interactable.h"
 #include <string>
 #include <cassert>
 #include <iostream>
 
 using namespace std;
 
-class Projectile : public ExternalEntity
+class Projectile : public Interactable
 {
     public:
         Projectile();
         Projectile(const Projectile& p);
-        Projectile(int damage, float speed);
-        Projectile(const sf::Vector2f& dim, string file_name, int damage, float speed);
-        virtual ~Projectile(){}
-
-        int getDamage()const{return damage;}
-        int getSpeed()const{return speed;}
-
-        void setDamage(int damage);
-        void setSpeed(float speed);
-
-        bool update();
-
-        int damage;
-        float speed;
+        Projectile(string img_path, int damage, float speed, int category, const sf::Vector2f& shape_size);
+        void update(sf::RenderWindow& window);
 };
 
 #endif // Projectile_H

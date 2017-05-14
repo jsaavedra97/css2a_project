@@ -1,11 +1,17 @@
 #include "PowerUp.h"
 
-PowerUp::PowerUp():ExternalEntity()
+PowerUp::PowerUp():Interactable()
 {
-    category = 1;
 }
-PowerUp::PowerUp(const sf::Vector2f& dim, string file_name, int category):ExternalEntity(dim,file_name)
+PowerUp::PowerUp(string img_path, int damage, float speed, int category, const sf::Vector2f& shape_size):Interactable(img_path, damage, speed, category, shape_size)
 {
-    this->category = category;
+}
+void PowerUp::setSpawnTime(double spawn_time)
+{
+    this->spawn_time = spawn_time;
+}
+void PowerUp::update(sf::RenderWindow& window)
+{
+
 }
 

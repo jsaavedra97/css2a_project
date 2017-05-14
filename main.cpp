@@ -3,7 +3,6 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-#include "ResourcePath.h"
 #include "Environment.h"
 #include "PowerUp.h"
 #include "Player.h"
@@ -23,8 +22,8 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(800, 1000), "Space Inviters", sf::Style::Close | sf::Style::Titlebar);
 
-    Ship *player1 = new Player(file_left, file_mid, file_right, 100, 400.0f, 800.0f, Projectile(sf::Vector2f(20.0f,100.0f),textu,10,-1.0f));
-    Environment *env = new Environment;
+    Environment* env = new Environment;
+    Ship* player1 = new Player(file_mid,100,Projectile("l.png", 10,-0.1f, 1,sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
 
     srand(time(NULL));
 
@@ -55,13 +54,16 @@ int main()
         window.clear();
 
         //update
-        player1->updateMovement(window);
-        env->update();
+        player1->update(window);
+        env->update(window);
         env->updatePowerUp(clock2, elapsed2);
-
+        player1->checkBounds(env->getPowerUp()->getShape());
+        env->changePowerUp(player1->getSprite(),clock2,elapsed2);
         // draw
         window.draw(env->getShape());
-        window.draw(env->getPowerUp());
+
+        window.draw(env->getPowerUp()->getShape());
+
         player1->fire(window, clock, elapsed);
         window.draw(player1->getSprite());
         window.display();

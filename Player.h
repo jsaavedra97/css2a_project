@@ -1,26 +1,23 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
+#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 #include "Ship.h"
 
 using namespace std;
 
 class Player : public Ship
 {
-private:
-    static string file_left;
-    static string file_mid;
-    static string file_right;
 public:
     Player();
-    Player(string file_mid, int health, float x, float y ,const Projectile& p );
-    Player(string file_left, string file_mid, string file_right,
-           int health, float x, float y,const Projectile& p);
-    virtual ~Player(){}
+    Player(string img_path, int health, const Projectile& p, const sf::Vector2f& start_pos, const Environment& e);
 
-    virtual void updateMovement(sf::RenderWindow& window);
-    virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
-    virtual void takeDamage(const Projectile &p);
-    virtual void checkBounds();
+    void update(sf::RenderWindow& window);
+    void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
+    void takeDamage(const Projectile &p);
+    bool checkBounds(const sf::RectangleShape& r);
+    bool checkBounds(const sf::Sprite& s);
+    void changeWeapon(const int& category);
 };
 
 
