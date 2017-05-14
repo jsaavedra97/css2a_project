@@ -5,10 +5,12 @@ Player::Player() : Ship()
 {
     projectiles->setSpeed(-1.0f);
 }
-Player::Player(string img_path, int health, const Projectile& p, const sf::Vector2f& start_pos, const Environment& e) : Ship(img_path, health, p, start_pos, e)
+Player::Player(string img_path, int health, const Projectile& p, const sf::Vector2f& start_pos, const Environment& e) : Ship(img_path, health, p, start_pos)
 {
+    assert(start_pos.x > 0 && start_pos.y > 0 && start_pos.x < e.getWidth() && start_pos.y < e.getHeight());
     projectiles->setSpeed(-1.0f);
     sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().left-sprite.getGlobalBounds().width/2, sprite.getPosition().y));
+
 }
 void Player::update(sf::RenderWindow& window)
 {
