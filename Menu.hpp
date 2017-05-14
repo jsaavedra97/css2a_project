@@ -10,7 +10,6 @@
 #define Menu_hpp
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "ResourcePath.hpp"
 #include <fstream>
 #include <iostream>
 #include <ctime>
@@ -22,7 +21,7 @@ using namespace std;
 class Menu
 {
 public:
-    Menu(float width, float hight);
+    Menu(float width, float height);
     ~Menu();
     void draw(sf::RenderWindow &window);
     void MoveUp();
