@@ -10,7 +10,7 @@ class Player : public Ship
 {
 public:
     Player();
-    Player(string *img_path_arr, int num_textures, int health, Projectile& p, sf::Vector2f start_pos, Environment& e);
+    Player(string img_path, int health, const Projectile& p, sf::Vector2f start_pos, const Environment& e);
 
     void update(sf::RenderWindow& window);
     void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);

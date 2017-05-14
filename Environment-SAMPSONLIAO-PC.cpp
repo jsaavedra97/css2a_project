@@ -9,27 +9,28 @@ Environment::Environment():ExternalEntity()
     scroll_speed = 0.3;
     elapsed_time = 0.7;
 
-    texture.loadFromFile("./background.png");
+    texture[0].loadFromFile("./background.png");
     font.loadFromFile("./sansation.ttf");
     music.openFromFile("./spacenice.ogg");
     icon.loadFromFile("./shipIcon.png");
 
-    texture.setSmooth(false);
-    texture.setRepeated(true);
+    texture[0].setSmooth(false);
+    texture[0].setRepeated(true);
 
 
 
     y_pos = shape.getPosition().y;
 
-    shape.setTexture(&texture);
+    shape.setTexture(&texture[0]);
     shape.setSize(sf::Vector2f(width, height));
 
-    pu = new PowerUp("ll.png", 10, -0.05f, 1);
+    pu = new PowerUp;
     pu->setPos(genRandPos());
+
     music.play();
 
 }
-Environment::Environment(string img_path):ExternalEntity(img_path)
+Environment::Environment(string *img_path_arr, int num_textures):ExternalEntity(img_path_arr, num_textures)
 {
     width = 800;
     height = 1000;
@@ -41,16 +42,16 @@ Environment::Environment(string img_path):ExternalEntity(img_path)
     icon.loadFromFile("./shipIcon.png");
 
 
-    texture.setSmooth(false);
-    texture.setRepeated(true);
-    shape.setTexture(&texture);
+    texture[0].setSmooth(false);
+    texture[0].setRepeated(true);
+    shape.setTexture(&texture[0]);
     shape.setSize(sf::Vector2f(width, height));
 
     y_pos = shape.getPosition().y;
 
 
 
-    pu = new PowerUp("ll.png", 10, -0.05f, 1);
+    pu = new PowerUp;
     pu->setPos(genRandPos());
 
     music.play();
@@ -67,17 +68,18 @@ void Environment::update(sf::RenderWindow& window)
 void Environment::updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2)
 {
     int category;
-    if (elapsed2.asSeconds() >= 2)
+    if (elapsed2.asSeconds() >= 10)
     {
         if(pu != NULL)
         {
             clock2.restart();
+
             category = rand()%2;
             delete pu;
             if(category == 1)
-                pu = new PowerUp("ll.png",5, -0.05f, category); // needs change
+                pu = new PowerUp; // needs change
             else
-                pu = new PowerUp("l.png", 10, -0.01, category); // needs change
+                pu = new PowerUp; // needs change
             pu->setPos(sf::Vector2f(genRandPos()));
             cout << "update" << endl;
         }
@@ -93,12 +95,11 @@ void Environment::changePowerUp(const sf::Sprite&s,sf::Clock& clock2,sf::Time& e
         clock2.restart();
 
         if(category == 1)
-            pu = new PowerUp("ll.png",5, -0.05f, category); // needs change
+            pu = new PowerUp; // needs change
         else
-            pu = new PowerUp("l.png", 10, -0.01, category); // needs change
+            pu = new PowerUp;  // needs change
         pu->setCategory(category);
         pu->setPos(genRandPos());
-        cout << "touched" << endl;
 
     }
 }

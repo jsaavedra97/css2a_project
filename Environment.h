@@ -15,7 +15,8 @@ class Environment: public ExternalEntity
 {
 public:
     Environment();
-    Environment(string *img_path_arr, int num_textures);
+    Environment(string img_path);
+    virtual ~Environment(){}
     void update(sf::RenderWindow& window);
     void updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2);
     sf::Vector2f genRandPos();

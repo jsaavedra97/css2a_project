@@ -5,7 +5,7 @@ Player::Player() : Ship()
 {
     projectiles->setSpeed(-1.0f);
 }
-Player::Player(string *img_path_arr, int num_textures, int health, Projectile& p, sf::Vector2f start_pos, Environment& e) : Ship(img_path_arr, num_textures, health, p, start_pos, e)
+Player::Player(string img_path, int health, const Projectile& p, sf::Vector2f start_pos, const Environment& e) : Ship(img_path, health, p, start_pos, e)
 {
     projectiles->setSpeed(-1.0f);
 }
@@ -27,29 +27,29 @@ void Player::update(sf::RenderWindow& window)
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
             sprite.move(-0.4f, 0.0f);
-            sprite.setTexture(texture[0]);
+            sprite.setTexture(texture);
             left = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
             sprite.move(0.4f, 0.0f);
-            sprite.setTexture(texture[2]);
+            sprite.setTexture(texture);
             right = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
             sprite.move(0.0f, -0.4f);
             if(!left && !right)
-                sprite.setTexture(texture[1]);
+                sprite.setTexture(texture);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
             sprite.move(0.0f, 0.4f);
             if(!left && !right)
-                sprite.setTexture(texture[1]);
+                sprite.setTexture(texture);
         }
         if(!left && !right)
-            sprite.setTexture(texture[1]);
+            sprite.setTexture(texture);
     }
 }
 void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
@@ -61,17 +61,22 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
         {
             projectiles->setPos(sprite.getPosition());
             weapon_load.push_back(*projectiles);
+            cout << "fire" << endl;
             clock.restart();
         }
     }
 
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
-        window.draw(weapon_load[i].getShape());
+        window.draw(weapon_load[i].shape);
 
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
-    {
+    {sf::RenderWindow window;
+        weapon_load[i].update(window);
         if(weapon_load[i].isDead())
+        {
             weapon_load.erase(weapon_load.begin());
+            cout << "hit" << endl;
+        }
     }
 }
 void Player::takeDamage(const Projectile &p)
@@ -83,18 +88,18 @@ void Player::takeDamage(const Projectile &p)
 }
 void Player::changeWeapon(const int& category)
 {
-//    if(category == 0)
-//    {
-//        delete projectiles;
-//        projectiles = new Projectile(sf::Vector2f(20.0f,100.0f),"./sprites/player_sprites/smallfighter0005.png", 100, -5.0f);
-//        cout << "changed" << endl;
-//    }
-//    else if(category == 1)
-//    {
-//        delete projectiles;
-//        projectiles = new Projectile(sf::Vector2f(20.0f,100.0f),"ll.png", 10, -2.0f);
-//        cout << "changed" << endl;
-//    }
+    if(category == 0)
+    {
+        delete projectiles;
+        projectiles = new Projectile("./sprites/player_sprites/smallfighter0005.png", 100, -5.0f, 0);
+        cout << "changed" << endl;
+    }
+    else if(category == 1)
+    {
+        delete projectiles;
+        projectiles = new Projectile("ll.png", 50, -5.0f, 1);
+        cout << "changed" << endl;
+    }
 }
 bool Player::checkBounds(const sf::RectangleShape& r)
 {

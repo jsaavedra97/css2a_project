@@ -4,27 +4,18 @@ using namespace std;
 
 ExternalEntity::ExternalEntity()
 {
-    num_textures = 0;
     is_dead = false;
-    texture = new sf::Texture[num_textures];
-    texture[0].loadFromFile("./sprites/no_image.png");
+    texture.loadFromFile("./sprites/no_image.png");
 }
-ExternalEntity::ExternalEntity(string *img_path_arr, int num_textures)
+ExternalEntity::ExternalEntity(string img_path)
 {
     is_dead = false;
-    this->num_textures = num_textures;
-    texture = new sf::Texture[num_textures];
-
-    for(int i = 0; i < num_textures; i++)
-        texture[i].loadFromFile(img_path_arr[i]);
+    texture.loadFromFile(img_path);
 //    texture.loadFromFile(img_path);
 }
-void ExternalEntity::setTexture(string *img_path_arr, int num_textures)
+void ExternalEntity::setTexture(string img_path)
 {
-    this->num_textures = num_textures;
-    texture = new sf::Texture[num_textures];
-    for(int i = 0; i < num_textures; i++)
-        texture[i].loadFromFile(img_path_arr[i]);
+    texture.loadFromFile(img_path);
 }
 void ExternalEntity::setIsDead(bool is_dead)
 {

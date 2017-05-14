@@ -6,12 +6,18 @@ Interactable::Interactable(): ExternalEntity()
     damage = 5;
     speed = -5.0f;
     category = 1;
+    shape.setSize(sf::Vector2f(20.0f, 20.0f));
+    shape.setFillColor(sf::Color::White);
+    shape.setOrigin(10.0f, 0.0f);
+    texture.loadFromFile("./sprites/no_image.png");
+    shape.setTexture(&texture);
 }
-Interactable::Interactable(string *img_path_arr, int num_textures, int damage, float speed, int category):ExternalEntity(img_path_arr, num_textures)
+Interactable::Interactable(string img_path, int damage, float speed, int category):ExternalEntity(img_path)
 {
     this->damage = damage;
     this->speed = speed;
     this->category = category;
+
 }
 void Interactable::setPos(sf::Vector2f position)
 {
@@ -36,4 +42,9 @@ bool Interactable::checkBounds(const sf::RectangleShape& r)
 bool Interactable::checkBounds(const sf::Sprite& s)
 {
     return (shape.getGlobalBounds().intersects(s.getGlobalBounds()));
+}
+void Interactable::setTexture(string img_path)
+{
+    texture.loadFromFile(img_path);
+    shape.setTexture(&texture);
 }

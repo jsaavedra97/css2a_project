@@ -22,8 +22,8 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(800, 1000), "Space Inviters", sf::Style::Close | sf::Style::Titlebar);
 
-    Ship* player1 = new Player;
     Environment* env = new Environment;
+    Ship* player1 = new Player(file_mid,100,Projectile("l.png", 10,-0.1f, 1), sf::Vector2f(400,800), *env);
 
     srand(time(NULL));
 
@@ -60,7 +60,7 @@ int main()
         player1->checkBounds(env->getPowerUp()->getShape());
         env->changePowerUp(player1->getSprite(),clock2,elapsed2);
         // draw
-        window.draw( env->getShape());
+        window.draw(env->getShape());
 
         window.draw(env->getPowerUp()->getShape());
 

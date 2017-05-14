@@ -16,8 +16,8 @@ class Ship : public ExternalEntity
 {
 public:
     Ship();
-    Ship(string *img_path_arr, int num_textures, int health, Projectile& p, sf::Vector2f start_pos, Environment& e);
-
+    Ship(string img_path, int health, const Projectile& p, sf::Vector2f start_pos, const Environment& e);
+    virtual ~Ship(){}
     sf::Sprite getSprite()const{return sprite;}
     Projectile getProjectile(){return *projectiles;}
 

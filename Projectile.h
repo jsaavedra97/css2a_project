@@ -14,7 +14,7 @@ class Projectile : public Interactable
     public:
         Projectile();
         Projectile(const Projectile& p);
-        Projectile(string *img_path_arr, int num_textures, int damage, float speed, int category);
+        Projectile(string img_path, int damage, float speed, int category);
         void update(sf::RenderWindow& window);
 
     private:

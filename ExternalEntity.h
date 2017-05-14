@@ -12,21 +12,19 @@ class ExternalEntity
 {
     public:
         ExternalEntity();
-        ExternalEntity(string *img_path_arr, int num_textures);
+        ExternalEntity(string img_path);
         virtual ~ExternalEntity(){}
 
         // Accessor
         sf::Vector2f getPos()const{}
         sf::Vector2f getSize()const{}
-        int getNumTextures()const{return num_textures;}
         bool isDead()const{return is_dead;}
 //        string getImgFile()const{return img_path;}
 
         //Mutator
         void setPos(sf::Vector2f position);
         void setSize(sf::Vector2f s_size);
-        void setTexture(string* img_path_arr, int num_textures);
-        void setNumTextures(int num_textures);
+        void setTexture(string img_path);
         void setIsDead(bool is_dead);
 
 //        void setImgFile(string img_path);
@@ -38,8 +36,7 @@ class ExternalEntity
 
 
     protected:
-        sf::Texture* texture;
-        int num_textures;
+        sf::Texture texture;
         bool is_dead;
 };
 

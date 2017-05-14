@@ -3,8 +3,13 @@
 PowerUp::PowerUp():Interactable()
 {
 }
-PowerUp::PowerUp(string *img_path_arr, int num_textures, int damage, float speed, int category):Interactable(img_path_arr,num_textures, damage, speed, category)
+PowerUp::PowerUp(string img_path, int damage, float speed, int category):Interactable(img_path, damage, speed, category)
 {
+    shape.setSize(sf::Vector2f(20.0f, 20.0f));
+    shape.setFillColor(sf::Color::White);
+    shape.setOrigin(10.0f, 0.0f);
+    texture.loadFromFile(img_path);
+    shape.setTexture(&texture);
 }
 void PowerUp::setSpawnTime(double spawn_time)
 {
