@@ -7,16 +7,15 @@
 // Description: This class will create
 // a basic enemy ship object
 //***************************************
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-//***************************************
 #include "Ship.h"
 #include "Projectile.h"
+using namespace std;
 
 class Enemy: public Ship{
 private:
-    std::string enemy_name,
-                file_name;
+    // Image name
+    string file_name;
     // Determines Enemy movement pattern
     int movement_type;
     // Used in checking movement
@@ -25,20 +24,14 @@ private:
 public:
     // Constructors
     Enemy();
-    Enemy(std::string file_name, int health, float x, float y, const Projectile& p, std::string enemy_name, int movement_type);
+    Enemy(string img_path, int health, const Projectile& p, const sf::Vector2f& start_pos, int movement_type, bool boss);
 
-    // Mutators
-    void setEnemyName(std::string enemy_name){this->enemy_name = enemy_name;}
-
-    // Accessors
-    std::string getEnemyName()const{return enemy_name;}
-
-    //Other Methods
-    bool enemyDeadOrAlive()const;
+    // Virtual Methods
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
-    virtual void updateMovement(sf::RenderWindow& window);
-    virtual void takeDamage(const Projectile &p);
-    virtual void checkBounds();
+    virtual void update(sf::RenderWindow& window);
+    virtual void takeDamage(const Projectile &p){health -= p.getDamage();}
+    virtual bool checkBounds(const sf::RectangleShape& r);
+    virtual bool checkBounds(const sf::Sprite& s);
 };
 
 #endif // ENEMY_H_INCLUDED
