@@ -18,6 +18,11 @@ public:
     bool checkBounds(const sf::RectangleShape& r);
     bool checkBounds(const sf::Sprite& s);
     void changeWeapon(const int& category);
+
+private:
+    sf::Texture texture_left;
+    sf::Texture texture_mid;
+    sf::Texture texture_right;
 };
 
 

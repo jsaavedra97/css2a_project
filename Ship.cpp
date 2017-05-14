@@ -18,7 +18,6 @@ Ship::Ship(string img_path, int health, const Projectile& p, const sf::Vector2f&
     this->health = health;
     sprite.setOrigin(sprite.getLocalBounds().width/2, 0);
 //    sprite.setPosition(sf::Vector2f(start_pos.x-sprite.getGlobalBounds().width/2, start_pos.y));
-    cout << sprite.getLocalBounds().width << endl;
     sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().left-sprite.getGlobalBounds().width/2, sprite.getPosition().y));
 
     projectiles = new Projectile(p);

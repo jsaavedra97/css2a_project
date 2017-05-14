@@ -9,6 +9,8 @@ Player::Player(string img_path, int health, const Projectile& p, const sf::Vecto
 {
     assert(start_pos.x > 0 && start_pos.y > 0 && start_pos.x < e.getWidth() && start_pos.y < e.getHeight());
     projectiles->setSpeed(-1.0f);
+    texture_left.loadFromFile("./sprites/player_sprites/smallfighter0001.png");
+    texture_right.loadFromFile("./sprites/player_sprites/smallfighter0010.png");
     sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().left-sprite.getGlobalBounds().width/2, sprite.getPosition().y));
 
 }
@@ -30,29 +32,31 @@ void Player::update(sf::RenderWindow& window)
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
             sprite.move(-0.4f, 0.0f);
-            sprite.setTexture(texture);
+            sprite.setTexture(texture_left);
             left = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
             sprite.move(0.4f, 0.0f);
-            sprite.setTexture(texture);
+            sprite.setTexture(texture_right);
             right = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
             sprite.move(0.0f, -0.4f);
-            if(!left && !right)
-                sprite.setTexture(texture);
+            left = false;
+            right = false;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
             sprite.move(0.0f, 0.4f);
-            if(!left && !right)
-                sprite.setTexture(texture);
+            left = false;
+            right = false;
         }
         if(!left && !right)
+        {
             sprite.setTexture(texture);
+        }
     }
 }
 void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
@@ -64,7 +68,6 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
         {
             projectiles->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
             weapon_load.push_back(*projectiles);
-            cout << "fire" << endl;
             clock.restart();
         }
     }
@@ -73,12 +76,12 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
         window.draw(weapon_load[i].shape);
 
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
-    {sf::RenderWindow window;
+    {
+        sf::RenderWindow window;
         weapon_load[i].update(window);
         if(weapon_load[i].isDead())
         {
             weapon_load.erase(weapon_load.begin());
-            cout << "hit" << endl;
         }
     }
 }

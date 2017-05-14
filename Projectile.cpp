@@ -16,7 +16,6 @@ void Projectile::update(sf::RenderWindow& window)
     if(shape.getPosition().y > 0)
     {
         shape.move(0.0f, speed);
-//        cout << shape.getPosition().x << " " << shape.getPosition().y << endl;
     }
     else
         is_dead = true;

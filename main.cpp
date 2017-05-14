@@ -15,8 +15,8 @@ int main()
     sf::Clock player_clock;
     sf::Clock powerup_clock;
 
-    string file_left = "./sprites/player_sprites/smallfighter0001.png";
     string file_mid = "./sprites/player_sprites/smallfighter0005.png";
+    string file_left = "./sprites/player_sprites/smallfighter0001.png";
     string file_right = "./sprites/player_sprites/smallfighter0010.png";
 
     string textu = "./sprites/player_sprites/smallfighter0005.png";
@@ -54,7 +54,6 @@ int main()
                     switch (menu->getPressedItem())
                     {
                     case 0:
-                        cout << "Play button has been pressed!" << endl;
                         delete menu;
                         menu = NULL;
                         break;

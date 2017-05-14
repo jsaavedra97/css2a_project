@@ -89,9 +89,6 @@ void Environment::changePowerUp(const sf::Sprite&s,sf::Clock& clock2,sf::Time& e
     {
         int category = rand()%2;
         delete pu;
-
-        clock2.restart();
-
         if(category == 1)
             pu = new PowerUp("ll.png",5, -0.05f, category,sf::Vector2f(50.0f,50.0f)); // needs change
         else
@@ -99,7 +96,6 @@ void Environment::changePowerUp(const sf::Sprite&s,sf::Clock& clock2,sf::Time& e
         pu->setCategory(category);
         pu->setPos(genRandPos());
         cout << "touched" << endl;
-
     }
 }
 bool Environment::powerOff()
