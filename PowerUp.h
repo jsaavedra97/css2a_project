@@ -13,14 +13,14 @@ class PowerUp: public Interactable
 {
 public:
     PowerUp();
-    PowerUp(string img_path, int damage, float speed, int category,const sf::Vector2f& shape_size);
+    PowerUp(string img_path, int damage, float speed, int category,const sf::Vector2f& shape_size, float spawn_time);
 
-    double getSpawnTime()const{return spawn_time;}
-    void setSpawnTime(double spawn_time);
+    float getSpawnTime()const{return spawn_time;}
+    void setSpawnTime(float spawn_time);
     void update(sf::RenderWindow& window);
 
-private:
-    double spawn_time;
+public:
+    float spawn_time;
 
 };
 

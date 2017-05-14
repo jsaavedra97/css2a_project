@@ -26,7 +26,8 @@ int main()
     Menu *menu = new Menu(window.getSize().x,window.getSize().y);
 
     Environment* env = new Environment;
-    Ship* player1 = new Player(file_mid,100,Projectile("l.png", 10,-0.1f, 1,sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
+    Player* player1 = new Player(file_mid,100,Projectile("./sprites/no_image.png", 10,-0.05f, 1, sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
+//    Player* player1 = new Player(file_mid,100,Projectile("l.png", 10,-0.05f, 1, sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
 
     srand(time(NULL));
 
@@ -75,7 +76,13 @@ int main()
             env->update(window);
 //            env->updatePowerUp(powerup_clock, powerup_elapse);
             if(env->getPowerUp())
-                player1->checkBounds(env->getPowerUp()->getShape());
+            {
+//                player1->checkBounds(env->getPowerUp());
+                if(player1->checkBounds(env->getPowerUp()->getShape()))
+                {
+                    player1->changeWeapon(env->getPowerUp()->getCategory());
+                }
+            }
             env->changePowerUp(player1->getSprite(),powerup_clock,powerup_elapse, window);
             // draw
             window.draw(env->getShape());

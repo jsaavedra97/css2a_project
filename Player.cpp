@@ -64,7 +64,7 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        if(elapsed.asSeconds() > 0.5)
+        if(elapsed.asSeconds() > 0.3)
         {
             projectiles->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
             weapon_load.push_back(*projectiles);
@@ -96,24 +96,36 @@ void Player::changeWeapon(const int& category)
     if(category == 0)
     {
         delete projectiles;
-        projectiles = new Projectile("./sprites/player_sprites/smallfighter0005.png", 100, -5.0f, 0, sf::Vector2f(20.0f,100.0f));
-        cout << "changed" << endl;
+        projectiles = new Projectile("./sprites/player_sprites/smallfighter0005.png", 50, -5.0f, 0, sf::Vector2f(20.0f,100.0f));
+        cout << "changed 0" << endl;
     }
     else if(category == 1)
     {
         delete projectiles;
-        projectiles = new Projectile("ll.png", 50, -5.0f, 1,sf::Vector2f(20.0f,100.0f));
-        cout << "changed" << endl;
+        projectiles = new Projectile("ll.png", 10, -5.0f, 1,sf::Vector2f(20.0f,100.0f));
+        cout << "changed 1" << endl;
     }
 }
 bool Player::checkBounds(const sf::RectangleShape& r)
 {
-    return (sprite.getGlobalBounds().intersects(r.getGlobalBounds()));
+    if(sprite.getGlobalBounds().intersects(r.getGlobalBounds()))
+    {
+        cout << "bounds" << endl;
+        return true;
+    }
 }
 bool Player::checkBounds(const sf::Sprite& s)
 {
     return (sprite.getGlobalBounds().intersects(s.getGlobalBounds()));
 }
+//void Player::checkBounds(const PowerUp *p)
+//{
+//    if(sprite.getGlobalBounds().intersects(p->getShape().getGlobalBounds()))
+//    {
+//        changeWeapon(p->getCategory());
+//    }
+//}
+
 
 
 

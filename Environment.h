@@ -21,7 +21,7 @@ public:
     void updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2);
     sf::Vector2f genRandPos();
 
-    Interactable *getPowerUp(){return pu;}
+    PowerUp *getPowerUp(){return pu;}
     float getScrollSpeed()const{return scroll_speed;}
     float getYPos()const{return y_pos;}
     float getElapsedTime()const{return elapsed_time;}
@@ -42,8 +42,7 @@ private:
     float scroll_speed;
     float y_pos;
     float elapsed_time;
-
-    Interactable *pu;
+    PowerUp *pu;
 };
 
 #endif // ENVIRONMENT_H

@@ -10,6 +10,7 @@ Projectile::Projectile(const Projectile& p): Interactable()
 }
 Projectile::Projectile(string img_path,int damage, float speed, int category, const sf::Vector2f& shape_size):Interactable(img_path, damage, speed, category, shape_size)
 {
+
 }
 void Projectile::update(sf::RenderWindow& window)
 {

@@ -24,8 +24,8 @@ public:
     virtual void update(sf::RenderWindow& window)=0;
     virtual void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)=0;
     virtual void takeDamage(const Projectile &p)=0;
-    virtual bool checkBounds(const sf::RectangleShape& r)=0;
-    virtual bool checkBounds(const sf::Sprite& s)=0;
+    virtual bool checkBounds(const  sf::RectangleShape& r)=0;
+    virtual bool checkBounds( const sf::Sprite& s)=0;
 
 
 protected:

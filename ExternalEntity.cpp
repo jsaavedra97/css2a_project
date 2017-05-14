@@ -11,6 +11,7 @@ ExternalEntity::ExternalEntity(string img_path)
 {
     is_dead = false;
     texture.loadFromFile(img_path);
+    cout << "loaded" << endl;
 //    texture.loadFromFile(img_path);
 }
 void ExternalEntity::setTexture(string img_path)

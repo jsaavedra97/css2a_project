@@ -38,11 +38,11 @@ void Interactable::setSpeed(float speed)
 {
     this->speed = speed;
 }
-bool Interactable::checkBounds(const sf::RectangleShape& r)
+bool Interactable::checkBounds( const sf::RectangleShape& r)
 {
     return (shape.getGlobalBounds().intersects(r.getGlobalBounds()));
 }
-bool Interactable::checkBounds(const sf::Sprite& s)
+bool Interactable::checkBounds(const  sf::Sprite& s)
 {
     return (shape.getGlobalBounds().intersects(s.getGlobalBounds()));
 }

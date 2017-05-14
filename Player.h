@@ -3,6 +3,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "Ship.h"
+#include "PowerUp.h"
 
 using namespace std;
 
@@ -15,9 +16,10 @@ public:
     void update(sf::RenderWindow& window);
     void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
     void takeDamage(const Projectile &p);
-    bool checkBounds(const sf::RectangleShape& r);
-    bool checkBounds(const sf::Sprite& s);
+    bool checkBounds( const sf::RectangleShape& r);
+    bool checkBounds( const sf::Sprite& s);
     void changeWeapon(const int& category);
+//    void checkBounds(const PowerUp *p);
 
 private:
     sf::Texture texture_left;
