@@ -29,7 +29,7 @@ public:
     float getHeight()const{return height;}
 
     sf::RectangleShape getShape()const{return shape;}
-    void changePowerUp(const sf::Sprite& s,sf::Clock& clock2,sf::Time& elapsed2);
+    void changePowerUp(const sf::Sprite& s,sf::Clock& clock2,sf::Time& elapsed2,  sf::RenderWindow& window);
     bool powerOff();
 
 private:

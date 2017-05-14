@@ -77,7 +77,6 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
     {
-        sf::RenderWindow window;
         weapon_load[i].update(window);
         if(weapon_load[i].isDead())
         {

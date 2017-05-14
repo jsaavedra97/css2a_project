@@ -83,19 +83,37 @@ void Environment::updatePowerUp(sf::Clock& clock2,sf::Time& elapsed2)
         }
     }
 }
-void Environment::changePowerUp(const sf::Sprite&s,sf::Clock& clock2,sf::Time& elapsed2 )
+void Environment::changePowerUp(const sf::Sprite&s, sf::Clock& clock2,sf::Time& elapsed2, sf::RenderWindow& window )
 {
-    if(pu->checkBounds(s))
+    if(pu)
     {
+        window.draw(pu->getShape());
+
+        if(pu->checkBounds(s))
+        {
+            clock2.restart();
+            delete pu;
+            pu = NULL;
+            cout << "touched" << endl;
+        }
+    }
+    if (elapsed2.asSeconds() >= 5)
+    {
+        clock2.restart();
+        if(pu)
+        {
+            delete pu;
+            pu = NULL;
+            cout << "Auto delete" << endl;
+        }
+        cout << "pre create" << endl;
         int category = rand()%2;
-        delete pu;
         if(category == 1)
             pu = new PowerUp("ll.png",5, -0.05f, category,sf::Vector2f(50.0f,50.0f)); // needs change
         else
             pu = new PowerUp("l.png", 10, -0.01, category,sf::Vector2f(50.0f,50.0f)); // needs change
-        pu->setCategory(category);
-        pu->setPos(genRandPos());
-        cout << "touched" << endl;
+        pu->setPos(sf::Vector2f(genRandPos()));
+        cout << "created" << endl;
     }
 }
 bool Environment::powerOff()

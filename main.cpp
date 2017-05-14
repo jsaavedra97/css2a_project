@@ -73,12 +73,14 @@ int main()
             //update
             player1->update(window);
             env->update(window);
-            env->updatePowerUp(powerup_clock, powerup_elapse);
-            player1->checkBounds(env->getPowerUp()->getShape());
-            env->changePowerUp(player1->getSprite(),powerup_clock,powerup_elapse);
+//            env->updatePowerUp(powerup_clock, powerup_elapse);
+            if(env->getPowerUp())
+                player1->checkBounds(env->getPowerUp()->getShape());
+            env->changePowerUp(player1->getSprite(),powerup_clock,powerup_elapse, window);
             // draw
             window.draw(env->getShape());
-            window.draw(env->getPowerUp()->getShape());
+            if(env->getPowerUp())
+                window.draw(env->getPowerUp()->getShape());
             player1->fire(window, player_clock, projectile_elapse);
             window.draw(player1->getSprite());
         }
