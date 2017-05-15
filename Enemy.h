@@ -12,8 +12,9 @@ public:
     Enemy();
     Enemy(string img_path, int health, const Projectile& p, const sf::Vector2f& start_pos, int movement_type, bool boss);
     void update(sf::RenderWindow& window);
-    void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed, Ship*s);
+    void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
     void takeDamage(const Projectile *p);
+    void checkIfHit(Ship *s);
     bool checkBounds( const sf::RectangleShape& r);
     bool checkBounds( const sf::Sprite& s);
 

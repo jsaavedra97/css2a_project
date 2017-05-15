@@ -92,7 +92,7 @@ void Enemy::update(sf::RenderWindow& window)
         break;
     }
 }
-void Enemy::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed, Ship *s)
+void Enemy::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 {
 
 
@@ -114,20 +114,24 @@ void Enemy::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed, 
         window.draw(weapon_load[i]->shape);
 
         weapon_load[i]->update(window);
-        if(weapon_load[i]->checkBounds(s->getSprite()))
-        {
-            weapon_load[i]->setIsDead(true);
-            cout << "got hit" << endl;
-        }
+
         if(weapon_load[i]->isDead())
         {
+            delete weapon_load[i];
             weapon_load.erase(weapon_load.begin()+i);
         }
     }
 }
 void Enemy::takeDamage(const Projectile *p)
 {
-    health -= p->getDamage();
+    cout << "health" << health << endl;
+    if(health - p->getDamage() >= 0)
+    {
+        health -= p->getDamage();
+    }
+    else
+        health = 0;
+    cout << "health" << health << endl;
 }
 //void Enemy::changeWeapon(const int& category)
 //{
@@ -156,6 +160,17 @@ bool Enemy::checkBounds(const sf::Sprite& s)
     if(sprite.getGlobalBounds().intersects(s.getGlobalBounds()))
     {
         return true;
+    }
+}
+void Enemy::checkIfHit(Ship *s)
+{
+    for(int i = 0; i < weapon_load.size(); i++)
+    {
+        if(weapon_load[i]->checkBounds(s->getSprite()))
+        {
+            s->takeDamage(weapon_load[i]);
+            weapon_load[i]->setIsDead(true);
+        }
     }
 }
 //void Player::checkBounds(const PowerUp *p)

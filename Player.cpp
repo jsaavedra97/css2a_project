@@ -58,7 +58,7 @@ void Player::update(sf::RenderWindow& window)
         }
     }
 }
-void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed,Ship *s)
+void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 {
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -78,12 +78,7 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed,
         window.draw(weapon_load[i]->shape);
         weapon_load[i]->update(window);
 
-        if(weapon_load[i]->checkBounds(s->getSprite()))
-        {
-            s->takeDamage(weapon_load[i]);
-            weapon_load[i]->setIsDead(true);
-            cout << "enemy health: " << s->getHealth() << endl;
-        }
+
         if(weapon_load[i]->isDead())
         {
             delete weapon_load[i];
@@ -93,7 +88,7 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed,
 }
 void Player::takeDamage(const Projectile *p)
 {
-    if(health - p->getDamage() > 0)
+    if(health - p->getDamage() >= 0)
     {
         health -= p->getDamage();
     }
@@ -105,7 +100,7 @@ void Player::changeWeapon(const int& category)
     if(category == 0)
     {
         delete projectiles;
-        projectiles = new Projectile("./sprites/player_sprites/smallfighter0005.png", 50, -5.0f, 0, sf::Vector2f(20.0f,100.0f));
+        projectiles = new Projectile("./sprites/laser.png", 50, -5.0f, 0, sf::Vector2f(20.0f,400.0f));
         cout << "changed 0" << endl;
     }
     else if(category == 1)
@@ -126,6 +121,18 @@ bool Player::checkBounds(const sf::Sprite& s)
 {
     return (sprite.getGlobalBounds().intersects(s.getGlobalBounds()));
 }
+void Player::checkIfHit(Ship *s)
+{
+    for(int i = 0; i < weapon_load.size(); i++)
+    {
+        if(weapon_load[i]->checkBounds(s->getSprite()))
+        {
+            s->takeDamage(weapon_load[i]);
+            weapon_load[i]->setIsDead(true);
+        }
+    }
+}
+
 //void Player::checkBounds(const PowerUp *p)
 //{
 //    if(sprite.getGlobalBounds().intersects(p->getShape().getGlobalBounds()))

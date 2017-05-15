@@ -24,7 +24,6 @@ void Projectile::update(sf::RenderWindow& window)
     }
     else
     {
-        cout << "hit end of screen" << endl;
         is_dead = true;
     }
 }

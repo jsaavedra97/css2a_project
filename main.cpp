@@ -20,8 +20,9 @@ int main()
 {
     srand(time(NULL));
 
-    sf::Clock player_clock;
-    sf::Clock enemy_clock;
+    sf::Clock player_fire_clock;
+    sf::Clock enemy_spawn_clock;
+    sf::Clock enemy_fire_flock;
     sf::Clock powerup_clock;
 
     string file_path = "./sprites/enemy_sprites/";
@@ -33,15 +34,14 @@ int main()
 
     vector<Enemy*> enemy_ships;
 
-    sf::Vector2f enemy_start_pos = sf::Vector2f(static_cast<float>(rand()%300+300), 10.0f);
+    float enemy_start_pos;
+    enemy_start_pos = rand()%600+100;
 
-    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), enemy_start_pos, 2, false));
-    sf::Vector2f enemy_start_pos2 = sf::Vector2f(static_cast<float>(rand()%300+300), 10.0f);
-
-    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), enemy_start_pos2, 2, false));
-    sf::Vector2f enemy_start_pos3 = sf::Vector2f(static_cast<float>(rand()%300+300), 10.0f);
-
-    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), enemy_start_pos3, 2, false));
+    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
+    enemy_start_pos = rand()%600+100;
+    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
+    enemy_start_pos = rand()%600+100;
+    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
 
     string file_mid = "./sprites/player_sprites/smallfighter0005.png";
     string file_left = "./sprites/player_sprites/smallfighter0001.png";
@@ -96,9 +96,17 @@ int main()
             menu->draw(window);
         else
         {
-            sf::Time p_projectile_elapse = player_clock.getElapsedTime(); // Player firing clock
-            sf::Time e_projectile_elapse = enemy_clock.getElapsedTime(); // Enemy firing clock
+
+
+            sf::Time p_projectile_elapse = player_fire_clock.getElapsedTime(); // Player firing clock
+            sf::Time e_projectile_elapse = enemy_fire_flock.getElapsedTime(); // Enemy firing clock
+            sf::Time e_spawn_elapse = enemy_spawn_clock.getElapsedTime(); // Enemy firing clock
             sf::Time powerup_elapse = powerup_clock.getElapsedTime(); // Environment powerup clock
+            if(e_spawn_elapse.asSeconds() > 5.0f)
+            {
+                enemy_spawn_clock.restart();
+                enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
+            }
 
             //update
             player1->update(window); // Player Movement
@@ -113,7 +121,7 @@ int main()
 
                 if(enemy_ships[i]->getPos().y >= 1100 || enemy_ships[i]->getHealth() <= 0)
                 {
-                    cout << "died" << endl;
+                    cout << "died" << enemy_ships[i]->getHealth() << endl;
                     delete enemy_ships[i];
                     enemy_ships.erase(enemy_ships.begin()+i);
                 }
@@ -137,20 +145,19 @@ int main()
             }
             env->changePowerUp(player1->getSprite(),powerup_clock,powerup_elapse, window); // Change PowerUp
 
-            for(int i = 0; i < enemy_ships.size(); i++)
-            {
-
-            }
 
             // draw
             window.draw(env->getShape()); // Environment
             if(env->getPowerUp())
                 window.draw(env->getPowerUp()->getShape()); // PowerUp
+            player1->fire(window, player_fire_clock, p_projectile_elapse); // Player Projectiles
+
             for(int i = 0; static_cast<unsigned>(i) < enemy_ships.size(); i++)
             {
-                player1->fire(window, player_clock, p_projectile_elapse, enemy_ships[i]); // Player Projectiles
+                player1->checkIfHit(enemy_ships[i]);
 
-                enemy_ships[i]->fire(window, enemy_clock, e_projectile_elapse, player1);
+                enemy_ships[i]->fire(window, enemy_fire_flock, e_projectile_elapse);
+                enemy_ships[i]->checkIfHit(player1);
                 window.draw(enemy_ships[0]->getSprite()); // Enemy
             }
             window.draw(player1->getSprite()); // Player
