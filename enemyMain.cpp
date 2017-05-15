@@ -9,24 +9,29 @@
 #include "Enemy.h"
 #include <ctime>
 #include <cstdlib>
-
+#include <vector>
+using namespace std;
 int main(){
     srand(static_cast<unsigned>(time(NULL)));
 
-    std::string file_path = "./sprites/enemy_sprites/";
-    std::vector<std::string> ship_image = {"black_space_ship1.png", "black_space_ship2.png", "black_space_ship3.png", "black_space_ship4.png"};
+    string file_path = "./sprites/enemy_sprites/";
+    vector<string> ship_image;
+    ship_image.push_back("black_space_ship1.png");
+    ship_image.push_back("black_space_ship2.png");
+    ship_image.push_back("black_space_ship3.png");
+    ship_image.push_back("black_space_ship4.png");
 
     // Enemies
-    std::vector<Ship*> enemy_ships;
+    vector<Ship*> enemy_ships;
     // Works with default constructor
     enemy_ships.push_back(new Enemy());
 
     /// Has issue with parameters
-    //enemy_ships.push_back(new Enemy(file_path + ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.5f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), 2, false));
-    //enemy_ships.push_back(new Enemy(file_path + ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.5f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), 1, false));
+    enemy_ships.push_back(new Enemy(file_path + ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.5f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), 2, false));
+    enemy_ships.push_back(new Enemy(file_path + ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.5f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), 1, false));
     // Boss prototype
     //Ship *boss_ship = new Enemy(file_path + "boss.png", 500, 400.0f, 10.0f, Projectile(50, 0.8f), 99, true);
-    std::cout << "Hello World!" << std::endl;
+    cout << "Hello World!" << std::endl;
     sf::RenderWindow window;
     sf::Clock clock;
     window.create(sf::VideoMode(800, 1000), "My Window!");
@@ -37,7 +42,7 @@ int main(){
         while(window.pollEvent(event)){
             switch(event.type){
                 case sf::Event::Closed: window.close(); break;
-                case sf::Event::KeyPressed: switch(event.key.code){default: std::cout << "Something was pressed" << std::endl; break;} break;
+                case sf::Event::KeyPressed: switch(event.key.code){default: cout << "Something was pressed" << endl; break;} break;
                 default: break;
             }
         }

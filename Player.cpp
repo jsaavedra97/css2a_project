@@ -58,37 +58,47 @@ void Player::update(sf::RenderWindow& window)
         }
     }
 }
-void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
+void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed,Ship *s)
 {
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         if(elapsed.asSeconds() > 0.3)
         {
-            projectiles->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
-            weapon_load.push_back(*projectiles);
+            weapon_load.push_back(new Projectile(*projectiles));
+            weapon_load.back()->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
             clock.restart();
         }
     }
+//    for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
 
-    for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
-        window.draw(weapon_load[i].shape);
 
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
     {
-        weapon_load[i].update(window);
-        if(weapon_load[i].isDead())
+        window.draw(weapon_load[i]->shape);
+        weapon_load[i]->update(window);
+
+        if(weapon_load[i]->checkBounds(s->getSprite()))
         {
-            weapon_load.erase(weapon_load.begin());
+            s->takeDamage(weapon_load[i]);
+            weapon_load[i]->setIsDead(true);
+            cout << "enemy health: " << s->getHealth() << endl;
+        }
+        if(weapon_load[i]->isDead())
+        {
+            delete weapon_load[i];
+            weapon_load.erase(weapon_load.begin()+i);
         }
     }
 }
-void Player::takeDamage(const Projectile &p)
+void Player::takeDamage(const Projectile *p)
 {
-    if(health - p.getDamage() > 0)
+    if(health - p->getDamage() > 0)
     {
-        health -= p.getDamage();
+        health -= p->getDamage();
     }
+    else
+        health = 0;
 }
 void Player::changeWeapon(const int& category)
 {
@@ -109,7 +119,6 @@ bool Player::checkBounds(const sf::RectangleShape& r)
 {
     if(sprite.getGlobalBounds().intersects(r.getGlobalBounds()))
     {
-        cout << "bounds" << endl;
         return true;
     }
 }

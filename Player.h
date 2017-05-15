@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Ship.h"
 #include "PowerUp.h"
+#include "Enemy.h"
 
 using namespace std;
 
@@ -14,8 +15,8 @@ public:
     Player(string img_path, int health, const Projectile& p, const sf::Vector2f& start_pos, const Environment& e);
 
     void update(sf::RenderWindow& window);
-    void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed);
-    void takeDamage(const Projectile &p);
+    void fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed,Ship *s);
+    void takeDamage(const Projectile *p);
     bool checkBounds( const sf::RectangleShape& r);
     bool checkBounds( const sf::Sprite& s);
     void changeWeapon(const int& category);
