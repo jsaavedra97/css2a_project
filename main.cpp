@@ -18,7 +18,7 @@ sf::Vector2f gen_rand_spawn()
 }
 int main()
 {
-    srand(time(NULL));
+    srand(static_cast<unsigned int>(time(NULL)));
 
     sf::Clock player_fire_clock;
     sf::Clock enemy_spawn_clock;
@@ -113,11 +113,6 @@ int main()
 
             for(int i = 0; static_cast<unsigned>(i) < enemy_ships.size(); i++) // Enemy Movement
             {
-//                if(enemy_ships[i]->checkBounds(player1->getProjectile()->getShape()))
-//                {
-//                    cout <<" hit enemy check" << endl;
-//                    enemy_ships[i]->takeDamage(player1->getProjectile());
-//                }
 
                 if(enemy_ships[i]->getPos().y >= 1100 || enemy_ships[i]->getHealth() <= 0)
                 {
@@ -128,9 +123,9 @@ int main()
                 else
                 {
                     enemy_ships[i]->update(window);
-                    window.draw(enemy_ships[i]->getSprite());
                 }
 
+                window.draw(enemy_ships[i]->getSprite());
 
             }
 
