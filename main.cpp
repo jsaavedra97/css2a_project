@@ -33,7 +33,7 @@ int main()
     ship_image.push_back("./sprites/enemy_sprites/black_space_ship4.png");
 
     vector<Enemy*> enemy_ships;
-
+/*
     float enemy_start_pos;
     enemy_start_pos = rand()%600+100;
 
@@ -42,7 +42,9 @@ int main()
     enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
     enemy_start_pos = rand()%600+100;
     enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
-
+*/
+    //enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), 2, false));
+    //enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), 1, false));
     string file_mid = "./sprites/player_sprites/smallfighter0005.png";
     string file_left = "./sprites/player_sprites/smallfighter0001.png";
     string file_right = "./sprites/player_sprites/smallfighter0010.png";
@@ -105,7 +107,9 @@ int main()
             if(e_spawn_elapse.asSeconds() > 5.0f)
             {
                 enemy_spawn_clock.restart();
-                enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
+                //enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
+                enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), rand()%3+1, false));
+
             }
 
             //update
@@ -113,7 +117,6 @@ int main()
 
             for(int i = 0; static_cast<unsigned>(i) < enemy_ships.size(); i++) // Enemy Movement
             {
-
                 if(enemy_ships[i]->getPos().y >= 1100 || enemy_ships[i]->getHealth() <= 0)
                 {
                     cout << "died" << enemy_ships[i]->getHealth() << endl;
@@ -123,10 +126,9 @@ int main()
                 else
                 {
                     enemy_ships[i]->update(window);
+                    window.draw(enemy_ships[i]->getSprite());
+
                 }
-
-                window.draw(enemy_ships[i]->getSprite());
-
             }
 
             env->update(window); // Environment Scroll
@@ -153,7 +155,7 @@ int main()
 
                 enemy_ships[i]->fire(window, enemy_fire_flock, e_projectile_elapse);
                 enemy_ships[i]->checkIfHit(player1);
-                window.draw(enemy_ships[0]->getSprite()); // Enemy
+                window.draw(enemy_ships[i]->getSprite()); // Enemy
             }
             window.draw(player1->getSprite()); // Player
 

@@ -1,0 +1,147 @@
+# depslib dependency file v1.0
+1493422923 source:c:\users\magik\desktop\css2a_final_project\enemyobjects\enemymain.cpp
+	"Enemy.h"
+
+1493419732 source:c:\users\magik\desktop\css2a_final_project\enemyobjects\enemy.cpp
+	"Enemy.h"
+	<cassert>
+
+1493419732 c:\users\magik\desktop\css2a_final_project\enemyobjects\enemy.h
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<string>
+	<fstream>
+	<cstdlib>
+	<iostream>
+
+1494826538 source:c:\users\magik\desktop\css2a_final_project\enemy.cpp
+	"Enemy.h"
+
+1494822152 c:\users\magik\desktop\css2a_final_project\enemy.h
+	<SFML/Graphics.hpp>
+	"Ship.h"
+	"Projectile.h"
+	"Player.h"
+
+1494822152 c:\users\magik\desktop\css2a_final_project\ship.h
+	<SFML/System.hpp>
+	<SFML/Graphics.hpp>
+	<vector>
+	<string>
+	<cassert>
+	<iostream>
+	"Projectile.h"
+	"PowerUp.h"
+	"Environment.h"
+
+1494385183 c:\users\magik\desktop\css2a_final_project\weapon.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<string>
+	<cassert>
+	<iostream>
+
+1494826538 source:c:\users\magik\desktop\css2a_final_project\ship.cpp
+	"Ship.h"
+	"Environment.h"
+	<iostream>
+
+1493775527 source:c:\users\magik\desktop\css2a_final_project\weapon.cpp
+	"Weapon.h"
+
+1494793855 source:c:\users\magik\desktop\css2a_final_project\enemymain.cpp
+	"Enemy.h"
+	<ctime>
+	<cstdlib>
+
+1494785712 c:\users\magik\desktop\css2a_final_project\projectile.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	"Interactable.h"
+	<string>
+	<cassert>
+	<iostream>
+
+1494822152 source:c:\users\magik\desktop\css2a_final_project\projectile.cpp
+	"Projectile.h"
+
+1494822152 c:\users\magik\desktop\css2a_final_project\interactable.h
+	"ExternalEntity.h"
+	<cassert>
+	<iostream>
+
+1494822152 c:\users\magik\desktop\css2a_final_project\externalentity.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<string>
+	<cassert>
+	<iostream>
+
+1494822152 c:\users\magik\desktop\css2a_final_project\powerup.h
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<fstream>
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"Interactable.h"
+
+1494822152 c:\users\magik\desktop\css2a_final_project\environment.h
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<fstream>
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"ExternalEntity.h"
+	"PowerUp.h"
+
+1494822152 source:c:\users\magik\desktop\css2a_final_project\environment.cpp
+	"Environment.h"
+	<iostream>
+	<typeinfo>
+
+1494822152 source:c:\users\magik\desktop\css2a_final_project\externalentity.cpp
+	"ExternalEntity.h"
+	<iostream>
+
+1494822152 source:c:\users\magik\desktop\css2a_final_project\interactable.cpp
+	"Interactable.h"
+
+1494822152 source:c:\users\magik\desktop\css2a_final_project\powerup.cpp
+	"PowerUp.h"
+
+1494822152 c:\users\magik\desktop\css2a_final_project\player.h
+	<SFML/System.hpp>
+	<SFML/Graphics.hpp>
+	"Ship.h"
+	"PowerUp.h"
+	"Enemy.h"
+
+1494821395 source:c:\users\magik\desktop\css2a_final_project\menu.cpp
+	"Menu.hpp"
+
+1494821395 c:\users\magik\desktop\css2a_final_project\menu.hpp
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<fstream>
+	<iostream>
+	<ctime>
+	<cstdlib>
+
+1494822152 source:c:\users\magik\desktop\css2a_final_project\player.cpp
+	"Player.h"
+
+1494826367 source:c:\users\magik\desktop\css2a_final_project\main.cpp
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"Menu.hpp"
+	"Environment.h"
+	"PowerUp.h"
+	"Player.h"
+	<vector>
+	"Enemy.h"
+

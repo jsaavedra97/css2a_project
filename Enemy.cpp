@@ -16,6 +16,7 @@ Enemy::Enemy(string img_path, int health, const Projectile& p, const sf::Vector2
     texture.loadFromFile(img_path);
     sprite.setTexture(texture);
     sprite.setRotation(180.0f);
+    sprite.setPosition(sf::Vector2f(start_pos.x-sprite.getGlobalBounds().width/2, start_pos.y));
     if(!boss)
     {
         sprite.setScale(0.5f, 0.5f);
@@ -87,7 +88,7 @@ void Enemy::update(sf::RenderWindow& window)
         break;
     // Default Movement
     default:
-        if(sprite.getPosition().y < 1250)
+        if(sprite.getPosition().y < 1100)
             sprite.move(0.0f, 0.05f);
         break;
     }
