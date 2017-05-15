@@ -95,7 +95,7 @@ int main()
             {
                 if(kill_count % 10 ==0 && kill_count != 0)
                 {
-                    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), rand()%3+1, true));
+                    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 1000, Projectile(file_path + "alien_missile.png", 25, 1.0f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), rand()%3+1, true));
                     cout << "LOAD BOSS" << endl;
                 }
                 else
@@ -113,6 +113,7 @@ int main()
                 if(enemy_ships[i]->getPos().y >= 1100 || enemy_ships[i]->getHealth() <= 0)
                 {
                     cout << "died" << enemy_ships[i]->getHealth() << endl;
+
                     delete enemy_ships[i];
                     enemy_ships.erase(enemy_ships.begin()+i);
                     kill_count++;

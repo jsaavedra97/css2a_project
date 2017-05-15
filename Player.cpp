@@ -67,6 +67,7 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
+
         if(elapsed.asSeconds() > 0.3)
         {
             weapon_load.push_back(new Projectile(*projectiles));
@@ -104,13 +105,13 @@ void Player::changeWeapon(const int& category)
     if(category == 0)
     {
         delete projectiles;
-        projectiles = new Projectile("./sprites/laser.png", 50, -5.0f, 0, sf::Vector2f(20.0f,400.0f));
+        projectiles = new Projectile("./sprites/laser.png", 50, -5.0f, 0, sf::Vector2f(50.0f,400.0f));
         cout << "changed 0" << endl;
     }
     else if(category == 1)
     {
         delete projectiles;
-        projectiles = new Projectile("ll.png", 10, -5.0f, 1,sf::Vector2f(20.0f,100.0f));
+        projectiles = new Projectile("ll.png", 10, -1.0f, 1,sf::Vector2f(20.0f,100.0f));
         cout << "changed 1" << endl;
     }
 }
