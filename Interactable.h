@@ -14,6 +14,7 @@ class Interactable:public ExternalEntity
 
         int getDamage()const{return damage;}
         int getSpeed()const{return speed;}
+        int getCategory()const{return category;}
 
         void setDamage(int damage);
         void setSpeed(float speed);

@@ -9,8 +9,9 @@ Player::Player(string img_path, int health, const Projectile& p, const sf::Vecto
 {
     assert(start_pos.x > 0 && start_pos.y > 0 && start_pos.x < e.getWidth() && start_pos.y < e.getHeight());
     projectiles->setSpeed(-1.0f);
+    texture_left.loadFromFile("./sprites/player_sprites/smallfighter0001.png");
+    texture_right.loadFromFile("./sprites/player_sprites/smallfighter0010.png");
     sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().left-sprite.getGlobalBounds().width/2, sprite.getPosition().y));
-
 }
 void Player::update(sf::RenderWindow& window)
 {
@@ -30,29 +31,31 @@ void Player::update(sf::RenderWindow& window)
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
             sprite.move(-0.4f, 0.0f);
-            sprite.setTexture(texture);
+            sprite.setTexture(texture_left);
             left = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
             sprite.move(0.4f, 0.0f);
-            sprite.setTexture(texture);
+            sprite.setTexture(texture_right);
             right = true;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
             sprite.move(0.0f, -0.4f);
-            if(!left && !right)
-                sprite.setTexture(texture);
+            left = false;
+            right = false;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
             sprite.move(0.0f, 0.4f);
-            if(!left && !right)
-                sprite.setTexture(texture);
+            left = false;
+            right = false;
         }
         if(!left && !right)
+        {
             sprite.setTexture(texture);
+        }
     }
 }
 void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
@@ -60,58 +63,84 @@ void Player::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        if(elapsed.asSeconds() > 0.5)
+        if(elapsed.asSeconds() > 0.3)
         {
-            projectiles->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
-            weapon_load.push_back(*projectiles);
-            cout << "fire" << endl;
+            weapon_load.push_back(new Projectile(*projectiles));
+            weapon_load.back()->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
             clock.restart();
         }
     }
+//    for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
+
 
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
-        window.draw(weapon_load[i].shape);
+    {
+        window.draw(weapon_load[i]->shape);
+        weapon_load[i]->update(window);
 
-    for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
-    {sf::RenderWindow window;
-        weapon_load[i].update(window);
-        if(weapon_load[i].isDead())
+
+        if(weapon_load[i]->isDead())
         {
-            weapon_load.erase(weapon_load.begin());
-            cout << "hit" << endl;
+            delete weapon_load[i];
+            weapon_load.erase(weapon_load.begin()+i);
         }
     }
 }
-void Player::takeDamage(const Projectile &p)
+void Player::takeDamage(const Projectile *p)
 {
-    if(health - p.getDamage() > 0)
+    if(health - p->getDamage() >= 0)
     {
-        health -= p.getDamage();
+        health -= p->getDamage();
     }
+    else
+        health = 0;
 }
 void Player::changeWeapon(const int& category)
 {
     if(category == 0)
     {
         delete projectiles;
-        projectiles = new Projectile("./sprites/player_sprites/smallfighter0005.png", 100, -5.0f, 0, sf::Vector2f(20.0f,100.0f));
-        cout << "changed" << endl;
+        projectiles = new Projectile("./sprites/laser.png", 50, -5.0f, 0, sf::Vector2f(20.0f,400.0f));
+        cout << "changed 0" << endl;
     }
     else if(category == 1)
     {
         delete projectiles;
-        projectiles = new Projectile("ll.png", 50, -5.0f, 1,sf::Vector2f(20.0f,100.0f));
-        cout << "changed" << endl;
+        projectiles = new Projectile("ll.png", 10, -5.0f, 1,sf::Vector2f(20.0f,100.0f));
+        cout << "changed 1" << endl;
     }
 }
 bool Player::checkBounds(const sf::RectangleShape& r)
 {
-    return (sprite.getGlobalBounds().intersects(r.getGlobalBounds()));
+    if(sprite.getGlobalBounds().intersects(r.getGlobalBounds()))
+    {
+        return true;
+    }
 }
 bool Player::checkBounds(const sf::Sprite& s)
 {
     return (sprite.getGlobalBounds().intersects(s.getGlobalBounds()));
 }
+void Player::checkIfHit(Ship *s)
+{
+    for(int i = 0; i < weapon_load.size(); i++)
+    {
+        if(weapon_load[i]->checkBounds(s->getSprite()))
+        {
+            s->takeDamage(weapon_load[i]);
+            weapon_load[i]->setIsDead(true);
+        }
+    }
+}
+
+//void Player::checkBounds(const PowerUp *p)
+//{
+//    if(sprite.getGlobalBounds().intersects(p->getShape().getGlobalBounds()))
+//    {
+//        changeWeapon(p->getCategory());
+//    }
+//}
+
 
 
 

@@ -31,7 +31,7 @@ class ExternalEntity
 
         // Methods
         virtual void update(sf::RenderWindow& window)=0;
-        virtual bool checkBounds(const sf::RectangleShape& r){}
+        virtual bool checkBounds(const  sf::RectangleShape& r){}
         virtual bool checkBounds(const sf::Sprite& s){}
 
 
