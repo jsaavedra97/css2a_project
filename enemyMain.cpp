@@ -26,7 +26,6 @@ int main(){
     //enemy_ships.push_back(new Enemy(file_path + ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.5f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), 1, false));
     // Boss prototype
     //Ship *boss_ship = new Enemy(file_path + "boss.png", 500, 400.0f, 10.0f, Projectile(50, 0.8f), 99, true);
-    std::cout << "Hello World!" << std::endl;
     sf::RenderWindow window;
     sf::Clock clock;
     window.create(sf::VideoMode(800, 1000), "My Window!");
