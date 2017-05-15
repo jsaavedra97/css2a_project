@@ -94,21 +94,13 @@ void Enemy::update(sf::RenderWindow& window)
 }
 void Enemy::fire(sf::RenderWindow& window, sf::Clock& clock, sf::Time& elapsed)
 {
-
-
     if(elapsed.asSeconds() > 2)
     {
         clock.restart();
-
 //        projectiles->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
         weapon_load.push_back(new Projectile(*projectiles));
         weapon_load.back()->setPos(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width/2,sprite.getGlobalBounds().top));
-
     }
-
-
-//    for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
-
     for(int i = 0; static_cast<unsigned>(i) < weapon_load.size(); i++)
     {
         window.draw(weapon_load[i]->shape);
@@ -133,21 +125,6 @@ void Enemy::takeDamage(const Projectile *p)
         health = 0;
     cout << "health" << health << endl;
 }
-//void Enemy::changeWeapon(const int& category)
-//{
-//    if(category == 0)
-//    {
-//        delete projectiles;
-//        projectiles = new Projectile("./sprites/player_sprites/smallfighter0005.png", 50, -5.0f, 0, sf::Vector2f(20.0f,100.0f));
-//        cout << "changed 0" << endl;
-//    }
-//    else if(category == 1)
-//    {
-//        delete projectiles;
-//        projectiles = new Projectile("ll.png", 10, -5.0f, 1,sf::Vector2f(20.0f,100.0f));
-//        cout << "changed 1" << endl;
-//    }
-//}
 bool Enemy::checkBounds(const sf::RectangleShape& r)
 {
     if(sprite.getGlobalBounds().intersects(r.getGlobalBounds()))
@@ -173,13 +150,6 @@ void Enemy::checkIfHit(Ship *s)
         }
     }
 }
-//void Player::checkBounds(const PowerUp *p)
-//{
-//    if(sprite.getGlobalBounds().intersects(p->getShape().getGlobalBounds()))
-//    {
-//        changeWeapon(p->getCategory());
-//    }
-//}
 
 
 

@@ -11,7 +11,11 @@ Player::Player(string img_path, int health, const Projectile& p, const sf::Vecto
     projectiles->setSpeed(-1.0f);
     texture_left.loadFromFile("./sprites/player_sprites/smallfighter0001.png");
     texture_right.loadFromFile("./sprites/player_sprites/smallfighter0010.png");
+    cout<< "this runs" << endl;
+    sprite.setPosition(sf::Vector2f(start_pos.x-sprite.getGlobalBounds().width/2, start_pos.y));
     sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().left-sprite.getGlobalBounds().width/2, sprite.getPosition().y));
+    projectiles = new Projectile(p);
+    projectiles->setPos(sprite.getPosition());
 }
 void Player::update(sf::RenderWindow& window)
 {

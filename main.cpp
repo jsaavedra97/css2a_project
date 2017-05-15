@@ -19,6 +19,7 @@ sf::Vector2f gen_rand_spawn()
 int main()
 {
     srand(static_cast<unsigned int>(time(NULL)));
+    int kill_count = 0;
 
     sf::Clock player_fire_clock;
     sf::Clock enemy_spawn_clock;
@@ -35,13 +36,7 @@ int main()
     vector<Enemy*> enemy_ships;
 
     float enemy_start_pos;
-    enemy_start_pos = rand()%600+100;
 
-    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
-    enemy_start_pos = rand()%600+100;
-    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
-    enemy_start_pos = rand()%600+100;
-    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
 
     string file_mid = "./sprites/player_sprites/smallfighter0005.png";
     string file_left = "./sprites/player_sprites/smallfighter0001.png";
@@ -54,7 +49,7 @@ int main()
     Menu *menu = new Menu(window.getSize().x,window.getSize().y);
 
     Environment* env = new Environment;
-    Player* player1 = new Player(file_mid,100,Projectile("./sprites/no_image.png", 10,-0.05f, 1, sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
+    Player* player1 = new Player(file_mid,100,Projectile("ll.png", 10,-0.05f, 1, sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
 //    Player* player1 = new Player(file_mid,100,Projectile("l.png", 10,-0.05f, 1, sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
 
 
@@ -96,6 +91,7 @@ int main()
             menu->draw(window);
         else
         {
+            enemy_start_pos = rand()%600+100;
 
 
             sf::Time p_projectile_elapse = player_fire_clock.getElapsedTime(); // Player firing clock
@@ -105,7 +101,14 @@ int main()
             if(e_spawn_elapse.asSeconds() > 5.0f)
             {
                 enemy_spawn_clock.restart();
-                enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
+                if(kill_count % 10 == 0 && kill_count != 0) // Spawn boss every 10th kill
+                {
+                    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 1000, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, true));
+                }
+                else
+                {
+                    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
+                }
             }
 
             //update
@@ -113,26 +116,20 @@ int main()
 
             for(int i = 0; static_cast<unsigned>(i) < enemy_ships.size(); i++) // Enemy Movement
             {
-
+                window.draw(enemy_ships[i]->getSprite());
                 if(enemy_ships[i]->getPos().y >= 1100 || enemy_ships[i]->getHealth() <= 0)
                 {
                     cout << "died" << enemy_ships[i]->getHealth() << endl;
                     delete enemy_ships[i];
                     enemy_ships.erase(enemy_ships.begin()+i);
+                    kill_count++;
                 }
                 else
                 {
                     enemy_ships[i]->update(window);
                 }
-
-                window.draw(enemy_ships[i]->getSprite());
-
             }
-
-            env->update(window); // Environment Scroll
-
-
-
+            env->update(window); // Environment Scrol
             if(env->getPowerUp())
             {
                 if(player1->checkBounds(env->getPowerUp()->getShape())) // Touch PowerUp
@@ -150,10 +147,9 @@ int main()
             for(int i = 0; static_cast<unsigned>(i) < enemy_ships.size(); i++)
             {
                 player1->checkIfHit(enemy_ships[i]);
-
                 enemy_ships[i]->fire(window, enemy_fire_flock, e_projectile_elapse);
                 enemy_ships[i]->checkIfHit(player1);
-                window.draw(enemy_ships[0]->getSprite()); // Enemy
+                window.draw(enemy_ships[i]->getSprite()); // Enemy
             }
             window.draw(player1->getSprite()); // Player
 
