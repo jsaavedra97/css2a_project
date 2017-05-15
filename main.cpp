@@ -35,9 +35,6 @@ int main()
 
     vector<Enemy*> enemy_ships;
 
-    float enemy_start_pos;
-
-
     string file_mid = "./sprites/player_sprites/smallfighter0005.png";
     string file_left = "./sprites/player_sprites/smallfighter0001.png";
     string file_right = "./sprites/player_sprites/smallfighter0010.png";
@@ -49,9 +46,7 @@ int main()
     Menu *menu = new Menu(window.getSize().x,window.getSize().y);
 
     Environment* env = new Environment;
-    Player* player1 = new Player(file_mid,100,Projectile("ll.png", 10,-0.05f, 1, sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
-//    Player* player1 = new Player(file_mid,100,Projectile("l.png", 10,-0.05f, 1, sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
-
+    Player* player1;
 
     while (window.isOpen())
     {
@@ -79,6 +74,7 @@ int main()
                     case 0:
                         delete menu;
                         menu = NULL;
+                        player1 = new Player(file_mid,100,Projectile("ll.png", 10,-1.00f, 1, sf::Vector2f(20.0f,100.0f)), sf::Vector2f(400,800), *env);
                         break;
                     case 1:
                         window.close();
@@ -91,24 +87,22 @@ int main()
             menu->draw(window);
         else
         {
-            enemy_start_pos = rand()%600+100;
-
-
             sf::Time p_projectile_elapse = player_fire_clock.getElapsedTime(); // Player firing clock
             sf::Time e_projectile_elapse = enemy_fire_flock.getElapsedTime(); // Enemy firing clock
             sf::Time e_spawn_elapse = enemy_spawn_clock.getElapsedTime(); // Enemy firing clock
             sf::Time powerup_elapse = powerup_clock.getElapsedTime(); // Environment powerup clock
             if(e_spawn_elapse.asSeconds() > 5.0f)
             {
-                enemy_spawn_clock.restart();
-                if(kill_count % 10 == 0 && kill_count != 0) // Spawn boss every 10th kill
+                if(kill_count % 10 ==0 && kill_count != 0)
                 {
-                    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 1000, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, true));
+                    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), rand()%3+1, true));
+                    cout << "LOAD BOSS" << endl;
                 }
                 else
                 {
-                    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(enemy_start_pos, 100.0f), 2, false));
+                    enemy_ships.push_back(new Enemy(ship_image[rand()%4], 100, Projectile(file_path + "alien_missile.png", 10, 0.05f, 1, sf::Vector2f(20.0f, 100.0f)), sf::Vector2f(static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 7.0f)) * 100.0f, 10.0f), rand()%3+1, false));
                 }
+                enemy_spawn_clock.restart();
             }
 
             //update
@@ -116,7 +110,6 @@ int main()
 
             for(int i = 0; static_cast<unsigned>(i) < enemy_ships.size(); i++) // Enemy Movement
             {
-                window.draw(enemy_ships[i]->getSprite());
                 if(enemy_ships[i]->getPos().y >= 1100 || enemy_ships[i]->getHealth() <= 0)
                 {
                     cout << "died" << enemy_ships[i]->getHealth() << endl;
@@ -127,9 +120,15 @@ int main()
                 else
                 {
                     enemy_ships[i]->update(window);
+                    window.draw(enemy_ships[i]->getSprite());
+
                 }
             }
-            env->update(window); // Environment Scrol
+
+            env->update(window); // Environment Scroll
+
+
+
             if(env->getPowerUp())
             {
                 if(player1->checkBounds(env->getPowerUp()->getShape())) // Touch PowerUp
@@ -147,12 +146,19 @@ int main()
             for(int i = 0; static_cast<unsigned>(i) < enemy_ships.size(); i++)
             {
                 player1->checkIfHit(enemy_ships[i]);
+
                 enemy_ships[i]->fire(window, enemy_fire_flock, e_projectile_elapse);
                 enemy_ships[i]->checkIfHit(player1);
                 window.draw(enemy_ships[i]->getSprite()); // Enemy
             }
             window.draw(player1->getSprite()); // Player
 
+            if(player1->getHealth() <= 0)
+            {
+                menu = new Menu(window.getSize().x,window.getSize().y);
+                delete player1;
+                player1 = NULL;
+            }
         }
         window.display();
     }
